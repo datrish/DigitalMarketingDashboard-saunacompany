@@ -105,6 +105,25 @@
   ]
  },
  {
+  "id": "T18",
+  "priority": "Urgent",
+  "area": "Content",
+  "owner": "Ruchi",
+  "effort": "M",
+  "impact": "High",
+  "status": "To do",
+  "title": "Fix the 39 scheduled blog posts before each goes live",
+  "why": "39 posts are scheduled one a day (6 Nov–14 Dec); no unpublished drafts. None has a category; 26 cover images have no alt text; 36 have no focus keyword; 4 have no SEO title. In the post checked, body text is set as Heading 5 instead of paragraphs and the 'Related' list isn't linked. About 8 posts overlap pages we already have (Wix Blog API, 6 Nov).",
+  "steps": [
+   "Work 3 days ahead of the schedule: fix each post before its publish date",
+   "Add cover image alt text (describe the photo + keyword)",
+   "Set one focus keyword and check the SEO title is filled",
+   "Choose a category (Guides, Costs, Case studies, Health, Design)",
+   "Change body text from Heading 5 to Paragraph; link the 'Related' titles",
+   "Merge or reschedule overlaps: steam room, best home sauna, infrared vs traditional, cost, cold plunge, three outdoor posts"
+  ]
+ },
+ {
   "id": "T07",
   "priority": "High",
   "area": "SEO",
