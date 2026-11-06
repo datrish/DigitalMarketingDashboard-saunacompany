@@ -4,8 +4,8 @@ Refresh: re-run the pulls and update the SNAPSHOT dicts below, or let the weekly
 import json, datetime, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-meta = {"updated": "2026-11-06", "gscWindow": "7 Oct – 3 Nov 2026 (28 days)", "site": "saunacompany.co.uk",
-        "links": {"Search Console": "https://search.google.com/search-console?resource_id=https://www.saunacompany.co.uk/",
+meta = {"updated": "2026-11-06", "taskSheet": "https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit", "gscWindow": "7 Oct – 3 Nov 2026 (28 days)", "site": "saunacompany.co.uk",
+        "links": {"Task sheet (Ruchi)": "https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit", "Search Console": "https://search.google.com/search-console?resource_id=https://www.saunacompany.co.uk/",
                   "OpenSEO project": "https://app.openseo.so/p/8b7fae56-ee74-4da0-91b8-cf245dfb2a41",
                   "Metricool": "https://app.metricool.com/",
                   "Google Business Profile": "https://business.google.com/",

@@ -98,9 +98,9 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
     <div class="links" id="toplinks"></div>
   </header>
   <nav class="jump" aria-label="Sections">
-    <a href="#overview">Overview</a><a href="#tasks">Do this</a><a href="#search">Search</a><a href="#pages">Pages</a>
+    <a href="#overview">Overview</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
     <a href="#keywords">Keywords</a><a href="#competitors">Competitors</a><a href="#local">Google local</a>
-    <a href="#content">Blog</a><a href="#social">Social</a><a href="#technical">Technical</a><a href="#routine">Weekly routine</a>
+    <a href="#content">Blog</a><a href="#social">Social</a><a href="#technical">Technical</a>
   </nav>
   <main id="app"></main>
 </div>
@@ -115,10 +115,11 @@ const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done' }
 fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
 
 function render(d) {
+  window.__SHEET__ = d.meta.taskSheet;
   $('#updated').textContent = `Data snapshot ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · ${d.meta.site}`;
   $('#toplinks').innerHTML = Object.entries(d.meta.links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
   const urgent = d.tasks.filter((t) => t.priority === 'Urgent' && t.status !== 'Done').length;
-  $('#app').innerHTML = [overview(d, urgent), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d), routine()].join('');
+  $('#app').innerHTML = [overview(d, urgent), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
   wireFilters(d);
 }
 
@@ -251,11 +252,20 @@ function technical(d) {
 }
 
 function routine() {
-  return `<section class="card" id="routine"><div class="card-head"><h2>Weekly routine for the marketer</h2></div><div class="routine">
-  <div><b>Monday · 30 min</b>Read this dashboard. Pick this week's tasks from the top of the list. Check Search Console for new errors.</div>
-  <div><b>Tue–Thu</b>Work through the tasks: one page improvement and one blog post (from the keyword gaps) each week.</div>
-  <div><b>Every day · 10 min</b>Reply to Google reviews and messages. Queue social posts in Metricool so it never runs empty.</div>
-  <div><b>Friday · 20 min</b>Mark tasks done. Note the review count, map rank and clicks. Send Deepti a 3-line update.</div>
+  const daily = [
+    ['Ask one client for a Google review', '10 min', 'Reviews drive the map listing: we have 3, the #1 company has 52.'],
+    ['Reply to every new review, message and Q&A', '5 min', 'Reply within 24 h in Google Business Profile.'],
+    ['One Google Business Profile update', '10 min', 'Mon photo · Tue post · Wed service or Q&A · Thu photo · Fri post.'],
+    ['Fix one page from the task list', '30 min', 'Better title, H2 with the exact search, 2–3 internal links, clear CTA.'],
+    ['Check the daily blog post', '15 min', 'One new keyword from the gaps table, link to a service page + case study, end with "Book a free consultation".'],
+    ['Queue one social post in Metricool', '10 min', 'Repurpose the blog or a case study; keep 7 days queued.'],
+    ['One new relevant link or listing', '10 min', 'Houzz, Checkatrade, Bark, HUUM/Harvia/Saunum dealer pages, architects, local press.'],
+    ['2-minute conversion check on a phone', '2 min', 'Call button, WhatsApp and form all work; "Book a free consultation" visible without scrolling.']];
+  return `<section class="card" id="routine"><div class="card-head"><h2>Daily routine: better rankings, more enquiries</h2><span class="note">About 90 minutes a day · tick it off on the <a href="${esc(window.__SHEET__)}" target="_blank" rel="noopener">Daily tab of the task sheet</a></span></div>
+  <div class="tablewrap"><table><thead><tr><th>#</th><th>Every day</th><th>Time</th><th>How</th></tr></thead><tbody>${daily.map((r, i) => `<tr><td>${i + 1}</td><td><b>${esc(r[0])}</b></td><td class="num">${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
+  <div class="routine" style="margin-top:12px">
+  <div><b>Monday · 30 min</b>Read this dashboard, pick the week's tasks from the top of the list, check Search Console for errors.</div>
+  <div><b>Friday · 20 min</b>Update Status on the Tasks tab, note reviews, map rank and clicks, send Deepti a 3-line update.</div>
   </div></section>`;
 }
 </script>
