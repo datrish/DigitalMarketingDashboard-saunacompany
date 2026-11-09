@@ -4,7 +4,7 @@ Refresh: re-run the pulls and update the SNAPSHOT dicts below, or let the weekly
 import json, datetime, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-meta = {"updated": "2026-11-06", "taskSheet": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit", "gscWindow": "7 Oct – 3 Nov 2026 (28 days)", "site": "saunacompany.co.uk", "trackerApi": "",
+meta = {"updated": "2026-11-06", "taskSheet": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit", "gscWindow": "7 Oct – 3 Nov 2026 (28 days)", "site": "saunacompany.co.uk", "trackerApi": "https://script.google.com/macros/s/AKfycbwKzQXb2ung6dtEaDYCPnOaDq9A-5YjUswGa5rXDQrFDYYt5aG01cT-GlRAOXOG2flF/exec",
         "links": {"Task sheet (Ruchi)": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit", "Search Console": "https://search.google.com/search-console?resource_id=https://www.saunacompany.co.uk/",
                   "OpenSEO project": "https://app.openseo.so/p/8b7fae56-ee74-4da0-91b8-cf245dfb2a41",
                   "Metricool": "https://app.metricool.com/",

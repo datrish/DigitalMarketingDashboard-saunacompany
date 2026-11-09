@@ -4,7 +4,7 @@
   "taskSheet": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit",
   "gscWindow": "7 Oct – 3 Nov 2026 (28 days)",
   "site": "saunacompany.co.uk",
-  "trackerApi": "",
+  "trackerApi": "https://script.google.com/macros/s/AKfycbwKzQXb2ung6dtEaDYCPnOaDq9A-5YjUswGa5rXDQrFDYYt5aG01cT-GlRAOXOG2flF/exec",
   "links": {
    "Task sheet (Ruchi)": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit",
    "Search Console": "https://search.google.com/search-console?resource_id=https://www.saunacompany.co.uk/",
