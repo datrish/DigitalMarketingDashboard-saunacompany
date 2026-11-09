@@ -86,6 +86,14 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
 .routine b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 15px; margin-bottom: 4px; }
 .err { padding: 20px; color: var(--bad); }
 @media (max-width: 560px) { header.top h1 { font-size: 22px; } .kpi .big { font-size: 22px; } }
+.upd { margin-top: 12px; padding: 10px; border: 1px dashed var(--line); border-radius: 10px; display: grid; gap: 8px; }
+.upd select, .upd textarea, .upd input, .rng input { font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); width: 100%; box-sizing: border-box; }
+.upd button, .rng button { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--card); cursor: pointer; justify-self: start; }
+.upd .msg { font-size: 12.5px; color: var(--muted); }
+.rng { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px; }
+.rng input { width: auto; }
+.logitem { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.logitem .when { font-size: 12px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -98,7 +106,7 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
     <div class="links" id="toplinks"></div>
   </header>
   <nav class="jump" aria-label="Sections">
-    <a href="#overview">Overview</a><a href="#pool">Pool site</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
+    <a href="#overview">Overview</a><a href="#progress">Progress</a><a href="#pool">Pool site</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
     <a href="#keywords">Keywords</a><a href="#competitors">Competitors</a><a href="#local">Google local</a>
     <a href="#content">Blog</a><a href="#social">Social</a><a href="#technical">Technical</a>
   </nav>
@@ -112,15 +120,17 @@ const pctChange = (a, b) => (b ? Math.round(((a - b) / b) * 100) : null);
 const arrow = (d, good) => (d == null ? '' : `<span class="${(d >= 0) === (good !== 'down') ? 'up' : 'down'}">${d >= 0 ? '▲' : '▼'} ${Math.abs(d)}%</span>`);
 const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done', 'Blocked': 's-todo', 'Needs Deepti': 's-todo' };
 
-fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
+fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
 
 function render(d) {
   window.__SHEET__ = d.meta.taskSheet;
   $('#updated').textContent = `Data snapshot ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · ${d.meta.site}`;
   $('#toplinks').innerHTML = Object.entries(d.meta.links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
   const urgent = d.tasks.filter((t) => t.priority === 'Urgent' && t.status !== 'Done').length;
-  $('#app').innerHTML = [overview(d, urgent), poolSec(d), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
+  $('#app').innerHTML = [overview(d, urgent), progress(d), poolSec(d), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
   wireFilters(d);
+  wireProgress(d);
+  wireUpdates(d);
 }
 
 function overview(d, urgent) {
@@ -164,12 +174,97 @@ function poolSec(d) {
   <p class="note">Pool tasks P1–P8 are in the task list below (filter: Pool website).</p></section>`;
 }
 
+// ---- Live tracker (Google Apps Script web app) ----
+const PRI = { '1 - High': 'Urgent', '2 - Medium': 'High', '3 - Low': 'Medium' };
+const ST = { 'Not started': 'To do' };
+const steps = (s) => String(s || '').replace(/ ; /g, ';').split(';').map((x) => x.trim()).filter(Boolean);
+function loadLive(d) {
+  d.log = [];
+  const api = d.meta.trackerApi;
+  if (!api) return d;
+  return fetch(api, { cache: 'no-store' }).then((r) => r.json()).then((j) => {
+    if (!j.ok) return d;
+    d.live = true;
+    d.tasks = j.tasks.map((r) => ({
+      id: r['ID'], priority: PRI[r['Priority']] || 'Medium', area: r['Area'], site: r['Site'], owner: 'Ruchi',
+      status: ST[r['Status']] || r['Status'] || 'To do', rawStatus: r['Status'], due: r['Target date'], done_on: r['Date done'],
+      title: r['Task'], why: r['Why (source)'], steps: steps(r['Pages / detail']), notes: r["Ruchi's notes / proof link"] }));
+    d.log = j.log || [];
+    d.liveAt = j.at;
+    return d;
+  }).catch(() => d);
+}
+const ukDate = (s) => { const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ''); return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null; };
+const isoDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const dayKey = (dt) => dt.toISOString().slice(0, 10);
+function progress(d) {
+  return `<section class="card" id="progress"><div class="card-head"><h2>Progress: what's been done</h2><span class="note">${d.live ? `Live from the task tracker · ${esc(d.liveAt)}` : 'From the last saved task list'}</span></div>
+  <div class="rng" id="rng"><span class="note">Show:</span>${[['today', 'Today'], ['yesterday', 'Yesterday'], ['week', 'Last 7 days'], ['month', 'This month'], ['all', 'All']].map(([k, l], i) => `<button data-r="${k}" class="${i === 0 ? '' : 'off'}" style="${i === 0 ? '' : 'background:var(--card);color:var(--ink)'}">${l}</button>`).join('')}
+  <input type="date" id="rfrom" aria-label="From"><input type="date" id="rto" aria-label="To"><button data-r="custom" style="background:var(--card);color:var(--ink)">Apply</button></div>
+  <div id="progout"></div></section>`;
+}
+function wireProgress(d) {
+  const out = $('#progout'); if (!out) return;
+  const show = (from, to, label) => {
+    const inR = (dt) => dt && dt >= from && dt <= to;
+    const done = new Map();
+    d.tasks.forEach((t) => { const dt = ukDate(t.done_on); if (t.status === 'Done' && inR(dt)) done.set(t.id, { id: t.id, title: t.title, when: t.done_on }); });
+    const ups = d.log.filter((l) => { const dt = isoDate(l.when); return inR(dt); }).reverse();
+    ups.filter((l) => l.to === 'Done').forEach((l) => done.set(l.id, { id: l.id, title: l.task, when: l.when }));
+    const open = d.tasks.filter((t) => t.status !== 'Done').length;
+    out.innerHTML = `<div class="kpis"><div class="kpi"><div class="lbl">Completed · ${esc(label)}</div><div class="big">${done.size}</div></div>
+      <div class="kpi"><div class="lbl">Updates · ${esc(label)}</div><div class="big">${ups.length}</div></div>
+      <div class="kpi"><div class="lbl">Still open (all)</div><div class="big">${open}</div></div></div>
+      <h3 style="font-size:16px;margin:14px 0 6px">Completed</h3>${done.size ? [...done.values()].map((x) => `<div class="logitem"><b>${esc(x.id)}</b> ${esc(x.title)} <span class="when">· ${esc(x.when)}</span></div>`).join('') : '<p class="note">Nothing completed in this period.</p>'}
+      <h3 style="font-size:16px;margin:14px 0 6px">All updates and comments</h3>${ups.length ? ups.map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)}</div><b>${esc(l.id)}</b> ${esc(l.task)} — ${esc(l.from)} → ${esc(l.to)}${l.comment ? `<div>${esc(l.comment)}</div>` : ''}</div>`).join('') : `<p class="note">${d.live ? 'No updates in this period.' : 'Updates appear here once the tracker connection is switched on.'}</p>`}`;
+  };
+  const range = (k) => {
+    const t = new Date(); t.setHours(0, 0, 0, 0); const end = new Date(t); end.setHours(23, 59, 59);
+    if (k === 'today') return [t, end, 'today'];
+    if (k === 'yesterday') { const y = new Date(t); y.setDate(y.getDate() - 1); const ye = new Date(y); ye.setHours(23, 59, 59); return [y, ye, 'yesterday']; }
+    if (k === 'week') { const w = new Date(t); w.setDate(w.getDate() - 6); return [w, end, 'last 7 days']; }
+    if (k === 'month') return [new Date(t.getFullYear(), t.getMonth(), 1), end, 'this month'];
+    if (k === 'custom') { const f = $('#rfrom').value, to = $('#rto').value; if (!f || !to) return null; const a = isoDate(f), b = isoDate(to); b.setHours(23, 59, 59); return [a, b, `${f} to ${to}`]; }
+    return [new Date(2000, 0, 1), end, 'all time'];
+  };
+  document.querySelectorAll('#rng button').forEach((b) => b.addEventListener('click', () => {
+    const r = range(b.dataset.r); if (!r) return;
+    document.querySelectorAll('#rng button').forEach((x) => { const on = x === b; x.style.background = on ? '' : 'var(--card)'; x.style.color = on ? '' : 'var(--ink)'; });
+    show(...r);
+  }));
+  show(...range('today'));
+}
+function getKey() { try { return localStorage.getItem('trackerKey') || ''; } catch (e) { return ''; } }
+function setKey(k) { try { localStorage.setItem('trackerKey', k); } catch (e) {} }
+function updForm(d, t) {
+  if (!d.live) return '';
+  const opts = ['Not started', 'In progress', 'Done', 'Blocked', 'Needs Deepti'].map((s) => `<option${(t.rawStatus || '') === s ? ' selected' : ''}>${s}</option>`).join('');
+  return `<form class="upd" data-id="${esc(t.id)}"><b>Update this task</b>
+    <select name="status" aria-label="Status">${opts}</select>
+    <textarea name="comment" rows="2" placeholder="What did you do? Add a link as proof."></textarea>
+    <input name="key" type="password" placeholder="Passcode" value="${esc(getKey())}" autocomplete="off">
+    <button type="submit">Save</button><span class="msg"></span></form>`;
+}
+function wireUpdates(d) {
+  if (!d.live) return;
+  document.querySelectorAll('form.upd').forEach((f) => f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
+    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, key: f.key.value, by: 'Ruchi' };
+    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
+      if (!j.ok) { msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode.' : 'Could not save: ' + j.error; return; }
+      setKey(body.key); msg.textContent = 'Saved.';
+      fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render);
+    }).catch(() => { msg.textContent = 'Could not reach the tracker. Try again.'; });
+  }));
+}
+
 function tasks(d) {
   const areas = [...new Set(d.tasks.map((t) => t.area))];
   const cards = d.tasks.map((t) => `<details class="task" data-p="${esc(t.priority)}" data-a="${esc(t.area)}">
     <summary><span class="tid">${esc(t.id)}</span><span class="ttl">${esc(t.title)}</span><span class="pill p-${esc(t.priority)}">${esc(t.priority)}</span>
       <span class="meta"><span>${esc(t.area)}</span>${t.site ? `·<span>${esc(t.site)}</span>` : ''}·<span>Owner: ${esc(t.owner)}</span>${t.due ? `·<span>Due ${esc(t.due)}</span>` : ''}·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
-    <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>${t.notes ? `<p class="why"><b>Ruchi's notes:</b> ${esc(t.notes)}</p>` : ''}</div></details>`).join('');
+    <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>${t.notes ? `<p class="why" style="white-space:pre-line"><b>Ruchi's notes:</b> ${esc(t.notes)}</p>` : ''}${updForm(d, t)}</div></details>`).join('');
   return `<section class="card" id="tasks"><div class="card-head"><h2>Do this: prioritised task list</h2><span class="note">Tap a task for the why and the steps. Ruchi updates status in the <a href="${esc(d.meta.taskSheet)}" target="_blank" rel="noopener">task tracker</a>; this list is synced from it.</span></div>
   <div class="filters" id="filters"><button class="on" data-f="all">All (${d.tasks.length})</button>${['Urgent', 'High', 'Medium'].map((p) => `<button data-f="p:${p}">${p} (${d.tasks.filter((t) => t.priority === p).length})</button>`).join('')}${areas.map((a) => `<button data-f="a:${esc(a)}">${esc(a)}</button>`).join('')}</div>
   <div id="tasklist">${cards}</div></section>`;
