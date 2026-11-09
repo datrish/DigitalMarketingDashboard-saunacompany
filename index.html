@@ -110,7 +110,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<
 const n0 = (v) => (v == null ? '–' : Number(v).toLocaleString('en-GB'));
 const pctChange = (a, b) => (b ? Math.round(((a - b) / b) * 100) : null);
 const arrow = (d, good) => (d == null ? '' : `<span class="${(d >= 0) === (good !== 'down') ? 'up' : 'down'}">${d >= 0 ? '▲' : '▼'} ${Math.abs(d)}%</span>`);
-const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done' };
+const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done', 'Blocked': 's-todo', 'Needs Deepti': 's-todo' };
 
 fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
 
@@ -137,7 +137,7 @@ function overview(d, urgent) {
     <div><b>Search:</b> impressions are up 12% on last month and 24% on last year, but clicks are flat. Pages are being shown, but titles aren't earning the click, and the main sales page (/sauna-installation) ranks 29th.</div>
     <div><b>Google local:</b> we appear 4th in the map for "sauna installation", but with 3 reviews against 52–166 for the businesses around us. Reviews are the fastest win.</div>
     <div><b>Content:</b> 27 blog posts, but several repeat each other and split their rankings. Big searches like "outdoor sauna" (9,900/month) and "garden sauna" (4,400) have weak pages; "basement sauna" and "commercial sauna" have none.</div>
-    <div><b>This week:</b> ${urgent} urgent tasks below. Start with reviews, Google Business Profile, tracking and the installation page.</div>
+    <div><b>This week:</b> ${urgent} urgent tasks below. Start with the empty posts, broken addresses and noindex fix (S1–S3), the pool site's quote buttons (P1) and the Aqua Spazio form test (L4).</div>
   </div></section>`;
 }
 
@@ -145,9 +145,9 @@ function tasks(d) {
   const areas = [...new Set(d.tasks.map((t) => t.area))];
   const cards = d.tasks.map((t) => `<details class="task" data-p="${esc(t.priority)}" data-a="${esc(t.area)}">
     <summary><span class="tid">${esc(t.id)}</span><span class="ttl">${esc(t.title)}</span><span class="pill p-${esc(t.priority)}">${esc(t.priority)}</span>
-      <span class="meta"><span>${esc(t.area)}</span>·<span>Owner: ${esc(t.owner)}</span>·<span>Effort ${esc(t.effort)}</span>·<span>Impact ${esc(t.impact)}</span>·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span></span></summary>
-    <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol></div></details>`).join('');
-  return `<section class="card" id="tasks"><div class="card-head"><h2>Do this: prioritised task list</h2><span class="note">Tap a task for the why and the steps. Effort S = under 2 h, M = half a day to 2 days, L = a week+.</span></div>
+      <span class="meta"><span>${esc(t.area)}</span>${t.site ? `·<span>${esc(t.site)}</span>` : ''}·<span>Owner: ${esc(t.owner)}</span>${t.due ? `·<span>Due ${esc(t.due)}</span>` : ''}·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
+    <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>${t.notes ? `<p class="why"><b>Ruchi's notes:</b> ${esc(t.notes)}</p>` : ''}</div></details>`).join('');
+  return `<section class="card" id="tasks"><div class="card-head"><h2>Do this: prioritised task list</h2><span class="note">Tap a task for the why and the steps. Ruchi updates status in the <a href="${esc(d.meta.taskSheet)}" target="_blank" rel="noopener">task tracker</a>; this list is synced from it.</span></div>
   <div class="filters" id="filters"><button class="on" data-f="all">All (${d.tasks.length})</button>${['Urgent', 'High', 'Medium'].map((p) => `<button data-f="p:${p}">${p} (${d.tasks.filter((t) => t.priority === p).length})</button>`).join('')}${areas.map((a) => `<button data-f="a:${esc(a)}">${esc(a)}</button>`).join('')}</div>
   <div id="tasklist">${cards}</div></section>`;
 }
@@ -261,7 +261,7 @@ function routine() {
     ['Queue one social post in Metricool', '10 min', 'Repurpose the blog or a case study; keep 7 days queued.'],
     ['One new relevant link or listing', '10 min', 'Houzz, Checkatrade, Bark, HUUM/Harvia/Saunum dealer pages, architects, local press.'],
     ['2-minute conversion check on a phone', '2 min', 'Call button, WhatsApp and form all work; "Book a free consultation" visible without scrolling.']];
-  return `<section class="card" id="routine"><div class="card-head"><h2>Daily routine: better rankings, more enquiries</h2><span class="note">About 90 minutes a day · tick it off on the <a href="${esc(window.__SHEET__)}" target="_blank" rel="noopener">Daily tab of the task sheet</a></span></div>
+  return `<section class="card" id="routine"><div class="card-head"><h2>Daily routine: better rankings, more enquiries</h2><span class="note">About 90 minutes a day · tick it off on the <a href="https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit" target="_blank" rel="noopener">Daily tab of the task sheet</a></span></div>
   <div class="tablewrap"><table><thead><tr><th>#</th><th>Every day</th><th>Time</th><th>How</th></tr></thead><tbody>${daily.map((r, i) => `<tr><td>${i + 1}</td><td><b>${esc(r[0])}</b></td><td class="num">${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
   <div class="routine" style="margin-top:12px">
   <div><b>Monday · 30 min</b>Read this dashboard, pick the week's tasks from the top of the list, check Search Console for errors.</div>

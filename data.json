@@ -1,11 +1,11 @@
 {
  "meta": {
   "updated": "2026-11-06",
-  "taskSheet": "https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit",
+  "taskSheet": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit",
   "gscWindow": "7 Oct – 3 Nov 2026 (28 days)",
   "site": "saunacompany.co.uk",
   "links": {
-   "Task sheet (Ruchi)": "https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit",
+   "Task sheet (Ruchi)": "https://docs.google.com/spreadsheets/d/1p9XYo2lI1HpOhPSk_zDu81XdUJExNkF08fh0tsk6Xns/edit",
    "Search Console": "https://search.google.com/search-console?resource_id=https://www.saunacompany.co.uk/",
    "OpenSEO project": "https://app.openseo.so/p/8b7fae56-ee74-4da0-91b8-cf245dfb2a41",
    "Metricool": "https://app.metricool.com/",
@@ -895,393 +895,698 @@
  },
  "tasks": [
   {
-   "id": "T01",
+   "id": "L3",
    "priority": "Urgent",
-   "area": "Local",
-   "owner": "Ruchi (contacts from Kiana)",
-   "effort": "S",
-   "impact": "High",
-   "status": "To do",
-   "title": "Get Google reviews: from 3 to 15 by 31 Dec",
-   "why": "3.7★ from only 3 reviews (one is 1★). Finnmark, #1 in the map pack, has 4.8★ from 52; Clearlight 5★ from 142; Sunlighten 4.9★ from 166.",
+   "area": "Leads",
+   "site": "Both",
+   "owner": "Ruchi",
+   "status": "Blocked",
+   "due": "Ongoing from 10 Nov",
+   "done_on": "",
+   "title": "Google reviews 3 → 15 + weekly Google Business Profile posts",
+   "why": "Map-pack visibility; target from Lead Recovery Plan",
    "steps": [
-    "Get the review link from Google Business Profile (Ask for reviews)",
-    "Kiana gives Ruchi the contacts; Ruchi sends one client a day the review link by WhatsApp + email, mentioning their project",
-    "Reply politely to the 1★ review",
-    "Add 'ask for a review' to the handover checklist on every job",
-    "Track the count weekly on this dashboard"
-   ]
+    "Ask past clients for reviews",
+    "1 post a week with project photos on each Google Business Profile"
+   ],
+   "notes": "Waiting for the client contact list from Kiana (old task T01)."
+  },
+  {
+   "id": "L4",
+   "priority": "Urgent",
+   "area": "Leads",
+   "site": "Aqua Spazio",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "10 Nov",
+   "done_on": "",
+   "title": "Test the Aqua Spazio website form",
+   "why": "Zero real enquiries in 2026 – Wix form data",
+   "steps": [
+    "Send a test, confirm it reaches info@ and Kiana"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "L5",
+   "priority": "High",
+   "area": "Leads",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 18 Nov",
+   "done_on": "",
+   "title": "Buyer-intent pages",
+   "why": "Buyer searches convert; benefits posts don't",
+   "steps": [
+    "Sauna installation London",
+    "outdoor sauna installation",
+    "commercial sauna",
+    "sauna cost. Each with consultation button + service links"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "L6",
+   "priority": "Urgent",
+   "area": "Leads",
+   "site": "Both",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "Every Friday",
+   "done_on": "",
+   "title": "Friday one-line update to Deepti",
+   "why": "Track progress weekly",
+   "steps": [
+    "Sauna leads (forms + info@), pool leads, review count, tasks done"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S1",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 13 Nov",
+   "done_on": "",
+   "title": "Fix 3 posts Google sees as empty (0 words)",
+   "why": "OpenSEO audit",
+   "steps": [
+    "/post/how-much-does-a-sauna-cost-in-the-uk-in-2026",
+    "/post/halotherapy-in-saunas",
+    "/post/sauna-in-clapham-bespoke-sauna-design-for-south-london-homes",
+    "URL Inspection → Test live URL → screenshot",
+    "fix in Wix",
+    "Request indexing"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S2",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 13 Nov",
+   "done_on": "",
+   "title": "Redirect 4 broken addresses + fix /* error",
+   "why": "Search Console – Not found (404)",
+   "steps": [
+    "/auroom-cala",
+    "/home",
+    "/copy-of-sauna-faq-s",
+    "/bespoke-saunas-lond → closest live page (Wix URL Redirect Manager)",
+    "Then Validate fix in Search Console"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S3",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 13 Nov",
+   "done_on": "",
+   "title": "Check noindex on 'Designing your bespoke home sauna'",
+   "why": "Search Console",
+   "steps": [
+    "/post/designing-your-bespoke-home-sauna-a-guide – SEO → Advanced → allow indexing",
+    "Request indexing"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S4",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Speed up slowest pages",
+   "why": "OpenSEO audit",
+   "steps": [
+    "/sauna-prices 4.8s",
+    "/bespoke-sauna-case-studies/garden-shed-quick-install-sauna-queens-park-london 3.5s",
+    "/post/modern-luxury-bespoke-sauna-trends 3.0s",
+    "/post/can-i-put-a-sauna-in-my-garden-shed… 2.4s",
+    "Compress images and remove heavy sections",
+    "check pagespeed.web.dev"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S5",
+   "priority": "High",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Get 3 crawled-not-indexed pages indexed",
+   "why": "Search Console",
+   "steps": [
+    "/bespoke-sauna-case-studies/royal-air-force-sauna",
+    "/bespoke-sauna-case-studies/sauna-in-a-garage",
+    "/post/unveiling-the-advantages-of-custom-home-sauna-designs",
+    "Add 150+ words + links then Request indexing"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S6",
+   "priority": "High",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Get 2 discovered-not-crawled pages indexed",
+   "why": "Search Console",
+   "steps": [
+    "/bespoke-sauna-case-studies/luxury-loft-sauna",
+    "/bespoke-sauna-case-studies/thames-view-sauna",
+    "Link from case studies page + 1–2 posts",
+    "Request indexing"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S7",
+   "priority": "High",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 27 Nov",
+   "done_on": "",
+   "title": "Link to 12 orphan pages",
+   "why": "OpenSEO audit – orphan pages",
+   "steps": [
+    "/about-us + posts: bespoke-sauna-solutions-london, designing-your-bespoke-home-sauna, best-uk-garden-sauna-designs, perks-of-garden-sauna-rooms, finnish-sauna-installation-uk, garden-sauna-ideas-uk, infrared-sauna-wellness-benefits, sauna-in-hampstead, himalayan-salt-saunas-uk, complete-london-home-sauna-buyers-guide-2026, unveiling-custom-home-sauna-designs"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S8",
+   "priority": "High",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 27 Nov",
+   "done_on": "",
+   "title": "Replace links to old (redirected) addresses",
+   "why": "OpenSEO audit – redirects",
+   "steps": [
+    "Use the Internal links tab in the task sheet",
+    "point each link at the final URL"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S9",
+   "priority": "Medium",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 4 Dec",
+   "done_on": "",
+   "title": "Fix heading levels (no H1 → H3 jumps)",
+   "why": "OpenSEO audit",
+   "steps": [
+    "9 case studies (basement-sauna-spa, compact-sauna, garden-room-hybrid, luxury-apartments, luxury-loft, royal-air-force, sauna-in-a-garage, small-outdoor-sauna, thames-view) + /about-us + 6 blog posts"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S10",
+   "priority": "Medium",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 4 Dec",
+   "done_on": "",
+   "title": "Rename short blog category titles + add meta descriptions",
+   "why": "OpenSEO audit",
+   "steps": [
+    "/blog/categories/costs, design, guides, health, case-studies (e.g. 'Sauna Costs & Prices')"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S11",
+   "priority": "Medium",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 13 Nov",
+   "done_on": "",
+   "title": "Member profiles",
+   "why": "Search Console + OpenSEO",
+   "steps": [
+    "Delete spam profile /profile/10879444…",
+    "set /profile/hemantatrish85956 to private"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "S12",
+   "priority": "High",
+   "area": "Sauna website",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 13 Nov",
+   "done_on": "",
+   "title": "Blog clean-up",
+   "why": "Wix blog check",
+   "steps": [
+    "7–9 Nov posts: body text from Heading to Paragraph + add category",
+    "fix 'Novemeber' typo (10 Nov post)",
+    "alt text on 6 Dec post cover"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P1",
+   "priority": "Urgent",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Make enquiring easy on every page",
+   "why": "Google clicks up from ~0.5/day (summer) to ~9/day (Nov) but still only 2–3 leads a month – Search Console + Wix forms",
+   "steps": [
+    "Contact form + phone visible on every page",
+    "'Get a quote' button on all price pages"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P2",
+   "priority": "Urgent",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 27 Nov",
+   "done_on": "",
+   "title": "Create a Commercial Pools page",
+   "why": "~5,200 impressions for commercial pool searches, position ~40, 0 clicks, no page exists – Search Console",
+   "steps": [
+    "Swim schools, gyms, hotels, plant rooms",
+    "case studies",
+    "quote form"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P3",
+   "priority": "Urgent",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 4 Dec",
+   "done_on": "",
+   "title": "Strengthen the 3 price pages",
+   "why": "Search Console",
+   "steps": [
+    "/swimming-pool-prices (pos 30, 4,182 impr)",
+    "/outdoor-pool-prices (pos 20, 4,393 impr)",
+    "/indoor-pool-prices (pos 51)",
+    "Add detail + FAQs + links from blog posts and case studies"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P4",
+   "priority": "High",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Rewrite Google title + description for 'bespoke swimming pool design'",
+   "why": "Search Console",
+   "steps": [
+    "Ranks position 2.2, 459 impressions, 0 clicks – make the snippet worth clicking"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P5",
+   "priority": "High",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 20 Nov",
+   "done_on": "",
+   "title": "Remove duplicate 'copy-of' pages",
+   "why": "Search Console",
+   "steps": [
+    "/copy-of-modern-house-pool",
+    "/copy-2-of-modern-house-pool",
+    "/copy-of-the-perfect-vanishing-edge",
+    "delete or redirect to the real page"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P6",
+   "priority": "Medium",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 27 Nov",
+   "done_on": "",
+   "title": "Check old sites redirect properly",
+   "why": "Search Console – referring URLs",
+   "steps": [
+    "swimmingpoolcompany.uk",
+    "blog.swimmingpoolcompany.co.uk",
+    "/product/ninja-silhouette-2/"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "P7",
+   "priority": "Medium",
+   "area": "Pool website",
+   "site": "Pool",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "By 4 Dec",
+   "done_on": "",
+   "title": "Fix heading order on 3 pages",
+   "why": "OpenSEO audit",
+   "steps": [
+    "/post/how-much-does-an-indoor-swimming-pool-cost-in-the-uk-in-2026",
+    "/post/outdoor-swimming-pools-in-london-uk-planning-building-a-reinforced-concrete-pool-2026-guide",
+    "/spa-plunge-pool-prices"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "D1",
+   "priority": "Urgent",
+   "area": "Daily",
+   "site": "Both",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "Every weekday",
+   "done_on": "",
+   "title": "Daily log",
+   "why": "Accountability",
+   "steps": [
+    "One line per task in the Daily log tab of the task sheet (Deepti gets the 6 pm email)"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "D2",
+   "priority": "High",
+   "area": "Daily",
+   "site": "Sauna",
+   "owner": "Ruchi",
+   "status": "To do",
+   "due": "Ongoing",
+   "done_on": "",
+   "title": "Scheduled blogs – buyer-intent only",
+   "why": "Benefits posts don't convert",
+   "steps": [
+    "Publish only buyer posts",
+    "each with service-page link + consultation button"
+   ],
+   "notes": ""
   },
   {
    "id": "T02",
    "priority": "Urgent",
-   "area": "Local",
+   "area": "Leads",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "High",
-   "status": "To do",
+   "status": "In progress",
+   "due": "13 Nov",
+   "done_on": "",
    "title": "Complete the Google Business Profile",
-   "why": "Only one category ('Sauna Shop'), no services, no booking link, not connected to Metricool. Finnmark lists 7 extra categories including Contractor.",
+   "why": "Only one category, no services, no booking link at start. Finnmark (#1 in map pack) lists 7 extra categories.",
    "steps": [
-    "Add secondary categories that fit, e.g. Contractor (check Google's list for spa/sauna contractor options)",
-    "Add every range as a Service with 'from £' price ex VAT (Sana, Radiata, Cubo, Premio, Vapore…)",
-    "Add the consultation booking link",
-    "Upload case-study photos with real captions (30 photos now)",
-    "Post one GBP update a week (case study, offer, blog)",
-    "Connect GBP to the 'saunacompany' brand in Metricool"
-   ]
-  },
-  {
-   "id": "T03",
-   "priority": "Urgent",
-   "area": "Tracking",
-   "owner": "Ruchi",
-   "effort": "S",
-   "impact": "High",
-   "status": "To do",
-   "title": "Confirm GA4 and conversion tracking",
-   "why": "GA4 is not connected to OpenSEO, and no analytics script shows in the site's embedded apps. Without it we can't see which pages produce enquiries.",
-   "steps": [
-    "Wix → Marketing Integrations → Google Analytics: check GA4 is connected",
-    "Mark key events: contact form submit, phone click, WhatsApp click",
-    "Connect the GA4 property to the OpenSEO project (Settings → Integrations)",
-    "Check Google Ads conversion import if ads are running"
-   ]
-  },
-  {
-   "id": "T04",
-   "priority": "Urgent",
-   "area": "SEO",
-   "owner": "Ruchi",
-   "effort": "M",
-   "impact": "High",
-   "status": "To do",
-   "title": "Rewrite the /sauna-installation page (money page ranks 29)",
-   "why": "2,414 impressions in 3 months but only 8 clicks; average position 29. Competitors Aqualine and Finnmark rank #1–2 for 'sauna installation'.",
-   "steps": [
-    "Title: 'Sauna Installation London & UK | Bespoke, Fully Installed' (≤60 chars)",
-    "One H1 matching the title",
-    "Add prices from £8,995 ex VAT, the install process, what's included/excluded",
-    "Add 3 case studies with photos and an FAQ",
-    "Link to it from the homepage and from every blog post that mentions installation"
-   ]
-  },
-  {
-   "id": "T05",
-   "priority": "Urgent",
-   "area": "SEO",
-   "owner": "Ruchi",
-   "effort": "M",
-   "impact": "High",
-   "status": "To do",
-   "title": "Merge duplicate blog posts (they compete with each other)",
-   "why": "Two 'home sauna comparison' posts (5,231 + 4,747 impressions, CTR 0.3–0.4%); two 'sauna cost' posts plus /sauna-prices; three near-identical 'London sauna services' posts.",
-   "steps": [
-    "Comparison: keep 'compare and choose the best home sauna types', merge the best parts of the other, 301 redirect it",
-    "Cost: keep one cost post (merge the 4 Nov post into the March post or vice versa), 301 the other; make /sauna-prices the price list that links to it",
-    "London: merge the three 'London sauna services' posts into one, 301 the rest",
-    "Add redirects in Wix → SEO → URL Redirect Manager"
-   ]
-  },
-  {
-   "id": "T06",
-   "priority": "Urgent",
-   "area": "Technical",
-   "owner": "Ruchi",
-   "effort": "S",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Delete the duplicate case study page",
-   "why": "/bespoke-sauna-case-studies/copy-of-garden-room-hybrid-sauna-bu is an accidental copy and Google has indexed it.",
-   "steps": [
-    "Delete the 'copy of' page in the Wix editor",
-    "301 redirect it to /bespoke-sauna-case-studies/garden-room-hybrid-sauna-burlington-road-london",
-    "Request removal in Search Console if it lingers"
-   ]
+    "Add secondary categories (e.g. Contractor)",
+    "add every range as a Service with 'from £' price ex VAT",
+    "add consultation booking link",
+    "upload case-study photos with captions",
+    "one GBP update a week",
+    "connect GBP to Metricool"
+   ],
+   "notes": "Ruchi (6 Nov): categories done; services + number done; booking link pending approval; 2 photo sets uploaded; 1 case study + 5 blog posts posted; Metricool connected."
   },
   {
    "id": "T18",
    "priority": "Urgent",
-   "area": "Content",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "High",
-   "status": "To do",
-   "title": "Fix the 39 scheduled blog posts before each goes live",
-   "why": "39 posts are scheduled one a day (6 Nov–14 Dec); no unpublished drafts. None has a category; 26 cover images have no alt text; 36 have no focus keyword; 4 have no SEO title. In the post checked, body text is set as Heading 5 instead of paragraphs and the 'Related' list isn't linked. About 8 posts overlap pages we already have (Wix Blog API, 6 Nov).",
+   "status": "In progress",
+   "due": "Ongoing to 14 Dec",
+   "done_on": "",
+   "title": "Fix the scheduled blog posts before each goes live",
+   "why": "Blog draft audit 6 Nov: 39 posts scheduled with missing categories, alt text, keywords and heading-style body text",
    "steps": [
-    "Work 3 days ahead of the schedule: fix each post before its publish date",
-    "Add cover image alt text (describe the photo + keyword)",
-    "Set one focus keyword and check the SEO title is filled",
-    "Choose a category (Guides, Costs, Case studies, Health, Design)",
-    "Change body text from Heading 5 to Paragraph; link the 'Related' titles",
-    "Merge or reschedule overlaps: steam room, best home sauna, infrared vs traditional, cost, cold plunge, three outdoor posts"
-   ]
+    "Work 3 days ahead",
+    "alt text, focus keyword, SEO title, category",
+    "body text as Paragraph (not Heading 5)",
+    "link 'Related' titles",
+    "merge or reschedule overlaps"
+   ],
+   "notes": "Ruchi: SEO titles fixed and images added; a few images pending."
   },
   {
    "id": "T07",
    "priority": "High",
-   "area": "SEO",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "S",
-   "impact": "High",
    "status": "To do",
+   "due": "27 Nov",
+   "done_on": "",
    "title": "Homepage title and description for more clicks",
-   "why": "42,241 impressions in 3 months with 1.75% CTR and average position 16.6: the biggest audience on the site.",
+   "why": "42,241 impressions in 3 months, 1.75% CTR, position 16.6 – Search Console",
    "steps": [
     "Title ≤60 chars with 'Bespoke Sauna Installation London' + brand",
-    "Description with a reason to click: 'from £8,995 ex VAT, free design consultation, 5-day fit-out'",
-    "Check there is exactly one H1"
-   ]
+    "description with a reason to click (from £8,995 ex VAT, free design consultation)",
+    "exactly one H1"
+   ],
+   "notes": ""
   },
   {
    "id": "T08",
    "priority": "High",
-   "area": "SEO",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
    "status": "To do",
+   "due": "27 Nov",
+   "done_on": "",
    "title": "Steam room page: fix the low CTR",
-   "why": "5,476 impressions, CTR 0.68%, position 16. 'home steam room' gets 1,300 searches/month with difficulty 0 and we rank 16.",
+   "why": "5,476 impressions, CTR 0.68%, position 16 – Search Console",
    "steps": [
-    "Title: 'Home Steam Room Design & Installation London | Vapore'",
-    "Add the price range £14,995–£19,995 ex VAT and what drives cost",
-    "Add steam room case studies and an FAQ (waterproofing, drainage, running cost)"
-   ]
+    "Title 'Home Steam Room Design & Installation London | Vapore'",
+    "add price range £14,995–£19,995 ex VAT",
+    "case studies + FAQ (waterproofing, drainage, running cost)"
+   ],
+   "notes": ""
   },
   {
    "id": "T09",
    "priority": "High",
-   "area": "SEO",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
    "status": "To do",
+   "due": "27 Nov",
+   "done_on": "",
    "title": "Rebuild the /bespoke-saunas-london hub page",
-   "why": "5,110 impressions but average position 41: it is the category page for every range, but too thin to rank.",
+   "why": "5,110 impressions but position 41 – too thin to rank (Search Console)",
    "steps": [
-    "Short intro on ventilation and löyly (our differentiator)",
-    "One card per range with photo, 'from' price and link",
-    "Comparison table (heat-up, temperature, power, price)",
-    "Links to case studies"
-   ]
+    "Intro on ventilation and löyly",
+    "one card per range with photo, 'from' price, link",
+    "comparison table",
+    "links to case studies"
+   ],
+   "notes": ""
   },
   {
    "id": "T10",
    "priority": "High",
-   "area": "Content",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "L",
-   "impact": "High",
    "status": "To do",
+   "due": "18 Dec",
+   "done_on": "",
    "title": "Create pages for the biggest keyword gaps",
-   "why": "We have no page that targets: sauna and cold plunge (1,900/mo), basement sauna (1,000/mo, low competition), indoor sauna (1,900/mo), commercial/hotel saunas (CPC £6.39, highest-value leads), bathroom sauna (320/mo).",
+   "why": "No page targets sauna & cold plunge (1,900/mo), basement sauna (1,000/mo), indoor sauna (1,900/mo), commercial saunas – keyword data",
    "steps": [
-    "Basement Saunas London: use the basement case studies",
-    "Commercial Saunas: hotels, gyms, health clubs, developers",
-    "Sauna + Cold Plunge: garden wellness packages",
-    "Bathroom & En-suite Saunas: small-space builds",
-    "Upgrade /luxury-outdoor-saunas for 'outdoor sauna' (9,900/mo) and /garden-sauna for 'garden sauna' (4,400/mo)"
-   ]
-  },
-  {
-   "id": "T11",
-   "priority": "High",
-   "area": "Content",
-   "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Blog: one keyword per post, linked to a service page",
-   "why": "No posts June–October, then daily. Several posts overlap. 11 posts use '-post-ai-image' files with no alt text.",
-   "steps": [
-    "Pick each new post's keyword from the Keyword gaps table; never repeat a topic",
-    "Every post links to one service page and one case study",
-    "Rename AI images and add alt text on the 11 posts",
-    "Use 4–5 categories (Guides, Costs, Case studies, Health, Design)"
-   ]
+    "Basement Saunas London",
+    "Commercial Saunas (hotels, gyms, health clubs)",
+    "Sauna + Cold Plunge",
+    "Bathroom & En-suite Saunas",
+    "upgrade outdoor + garden sauna pages"
+   ],
+   "notes": ""
   },
   {
    "id": "T12",
    "priority": "High",
-   "area": "Social",
+   "area": "Leads",
+   "site": "Both",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
    "status": "To do",
-   "title": "Fill the Metricool queue (0 posts scheduled)",
-   "why": "Nothing scheduled for the next 30 days. Instagram did well last month (26 posts, +20 followers, 575 interactions); Facebook got 13 interactions from 14 posts.",
+   "due": "27 Nov",
+   "done_on": "",
+   "title": "Fill the Metricool social queue",
+   "why": "Nothing scheduled for 30 days; Instagram did well last month – Metricool",
    "steps": [
-    "Schedule 3 posts a week on Instagram + Facebook: case-study reels, before/after, tips",
-    "Turn each blog post into a carousel",
-    "Add a LinkedIn company page for architects, developers and hotels",
-    "Review best posting times in Metricool monthly"
-   ]
+    "3 posts a week on Instagram + Facebook (case-study reels, before/after, tips)",
+    "turn each blog post into a carousel"
+   ],
+   "notes": ""
   },
   {
    "id": "T13",
    "priority": "Medium",
-   "area": "Links",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
    "status": "To do",
+   "due": "18 Dec",
+   "done_on": "",
    "title": "Replace low-quality backlinks with relevant ones",
-   "why": "164 referring domains, but most added since May 2026 are unrelated foreign sites. Relevant links (Yell, Aqua Spazio, local press) are few.",
+   "why": "Most referring domains since May are unrelated foreign sites – OpenSEO backlinks",
    "steps": [
-    "Check whether a paid link package is running; stop it if so",
-    "List the business on Houzz, Checkatrade or TrustATrader, and Bark",
-    "Ask suppliers (HUUM, Harvia, Saunum) for a dealer/installer listing",
-    "Pitch 2 case studies a quarter to local press and interiors blogs",
-    "Partner pages with architects and designers we work with"
-   ]
+    "Check no paid link package is running",
+    "list on Houzz, Checkatrade/TrustATrader",
+    "ask HUUM, Harvia, Saunum for installer listings",
+    "pitch 2 case studies a quarter to local press"
+   ],
+   "notes": ""
   },
   {
    "id": "T14",
    "priority": "Medium",
-   "area": "Local",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
    "status": "To do",
+   "due": "18 Dec",
+   "done_on": "",
    "title": "Area pages for London and Surrey",
-   "why": "'sauna london' gets 6,600 searches/month; we rank 21–32. The Clapham and Hampstead blog posts get 13 and 57 impressions.",
+   "why": "\"sauna london\" 6,600 searches/month; we rank 21–32",
    "steps": [
-    "Build area pages with real local case studies: Kensington & Chelsea, Hampstead & North London, South-West London, Surrey",
-    "Each with its own photos, projects and a contact CTA",
-    "Link them from the footer"
-   ]
-  },
-  {
-   "id": "T15",
-   "priority": "Medium",
-   "area": "Technical",
-   "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Speed up slow pages",
-   "why": "34 of 100 crawled pages took 1.5–3.3 seconds to respond (site audit, 4 Nov).",
-   "steps": [
-    "Compress hero images and use WebP",
-    "Remove unused apps and fonts",
-    "Lazy-load galleries on case-study pages",
-    "Check Core Web Vitals in Search Console monthly"
-   ]
-  },
-  {
-   "id": "T16",
-   "priority": "Medium",
-   "area": "Technical",
-   "owner": "Ruchi",
-   "effort": "S",
-   "impact": "Low",
-   "status": "To do",
-   "title": "Tidy headings, FAQ schema and member pages",
-   "why": "Heading levels skip on 15 pages; the FAQ page ranks 38.7; public member profile pages get crawled.",
-   "steps": [
-    "Fix H1 → H2 → H3 order on case studies",
-    "Add FAQ schema to /sauna-faq and service pages",
-    "Turn off public member profiles in Wix Members settings"
-   ]
+    "Kensington & Chelsea, Hampstead & North London, South-West London, Surrey – each with real local case studies and a contact button"
+   ],
+   "notes": ""
   },
   {
    "id": "T17",
    "priority": "Medium",
-   "area": "SEO",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "S",
-   "impact": "Medium",
    "status": "To do",
+   "due": "18 Dec",
+   "done_on": "",
    "title": "Quick wins: queries in positions 5–20",
-   "why": "See the 'Close to page 1' table: e.g. 'sauna installation' 815 impressions at 7.4; 'salt sauna' 578 at 8.2; 'best home sauna uk' 547 at 10.1.",
+   "why": "e.g. 'sauna installation' position 7.4; 'salt sauna' 8.2; 'best home sauna uk' 10.1 – Search Console",
    "steps": [
     "Put the exact query in the page title or an H2",
-    "Add 2–3 internal links using the query as anchor text",
-    "Re-check positions after 4 weeks"
-   ]
+    "add 2–3 internal links using it",
+    "re-check after 4 weeks"
+   ],
+   "notes": ""
   },
   {
-   "id": "T19",
+   "id": "T03",
    "priority": "Urgent",
-   "area": "Technical",
+   "area": "Leads",
+   "site": "Both",
    "owner": "Ruchi",
-   "effort": "S",
-   "impact": "High",
-   "status": "To do",
-   "title": "Fix the ~10 pages Google won't index",
-   "why": "Search Console (9 Nov): 82 not indexed vs 74 indexed. 55 are old addresses that redirect (normal) and 12 are blog tag pages (meant to be hidden). The real problems: 4 pages return 404, 1 blog post is set to noindex, 1 post Google rejected as thin, and 4 new case studies are not indexed.",
+   "status": "Done",
+   "due": "13 Nov",
+   "done_on": "09/11/2026",
+   "title": "Confirm GA4 and conversion tracking",
+   "why": "Needed to see which pages bring leads",
    "steps": [
-    "Add 301 redirects (Wix > SEO > URL Redirect Manager): /home > /, /auroom-cala > /sauna-design, /copy-of-sauna-faq-s > /sauna-faq, /bespoke-saunas-lond > /bespoke-saunas-london",
-    "Post 'Designing your bespoke home sauna': SEO settings > turn ON 'Let search engines index this page'",
-    "Redirect 'Unveiling the advantages of custom home sauna designs' to 'Home Sauna UK: The Complete Guide'",
-    "Case studies royal-air-force-sauna, sauna-in-a-garage, luxury-loft-sauna, thames-view-sauna: check they have 300+ words of their own and real photos; link each from the case-studies page and one blog post; then Search Console > URL inspection > Request indexing",
-    "Delete the spam member profile 'evovexufix0213187'; turn off public member profiles (Wix > Members)"
-   ]
+    "GA4 connected for Aqua Spazio, Sauna Company and Swimming Pool Company",
+    "form sends recorded"
+   ],
+   "notes": "Ruchi: connected all 3 sites; Agni-Jal added on GA4, pending on OpenSEO. Deepti confirmed form tracking works."
   },
   {
-   "id": "T20",
+   "id": "T04",
    "priority": "Urgent",
-   "area": "Technical",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "S",
-   "impact": "High",
-   "status": "To do",
-   "title": "Check 3 blog posts that load empty for crawlers",
-   "why": "The 9 Nov site crawl got an empty page (0 words, no heading, no links) for 'Sauna cost UK 2026' (5,523 impressions, our 3rd best post), 'Halotherapy in saunas' and 'Sauna in Clapham'. Google still has them indexed, but if it sees them empty next time they can drop.",
+   "status": "Done",
+   "due": "13 Nov",
+   "done_on": "09/11/2026",
+   "title": "Rewrite the /sauna-installation page",
+   "why": "Money page ranked 29 – Search Console",
    "steps": [
-    "Search Console > URL inspection > paste each URL > Test live URL > View tested page > Screenshot",
-    "If the screenshot is blank: open the post in Wix, remove any broken embed/old block, Publish again, then Request indexing",
-    "Note the result in the Daily log"
-   ]
+    "Title, H1, prices, process, case studies, FAQ"
+   ],
+   "notes": "Ruchi: tag line and content rewritten."
   },
   {
-   "id": "T21",
-   "priority": "High",
-   "area": "SEO",
+   "id": "T05",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "S",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Link to the 13 orphan pages",
-   "why": "13 pages have no links from other pages, including the salt sauna guide (47 clicks), Hampstead, Finnish installation and garden ideas posts, and About us. Google treats unlinked pages as unimportant.",
+   "status": "Done",
+   "due": "13 Nov",
+   "done_on": "09/11/2026",
+   "title": "Merge duplicate blog posts",
+   "why": "Duplicate posts competing with each other",
    "steps": [
-    "Use the 'Internal links' tab: add the 'link to it from' links",
-    "Put About us in the main menu or footer",
-    "Re-run the OpenSEO site audit after: orphan count should be 0"
-   ]
+    "Keep one post per topic, 301 the rest"
+   ],
+   "notes": "Ruchi: 4 Dec post competed with old post – deleted and created new post."
   },
   {
-   "id": "T22",
-   "priority": "High",
-   "area": "Technical",
+   "id": "T06",
+   "priority": "Urgent",
+   "area": "Sauna website",
+   "site": "Sauna",
    "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Speed up /sauna-prices (4.8 seconds)",
-   "why": "/sauna-prices is the 2nd most-visited page (172 views in 4 weeks) and the slowest page on the site (4.8 s server response). 64 of 128 pages are slow.",
+   "status": "Done",
+   "due": "13 Nov",
+   "done_on": "",
+   "title": "Delete the duplicate case study page",
+   "why": "Accidental copy indexed by Google",
    "steps": [
-    "Compress the 14 images (WebP, under 200 KB each)",
-    "Remove unused apps/widgets from the page",
-    "Re-test in PageSpeed Insights (mobile) and note the score"
-   ]
-  },
-  {
-   "id": "T23",
-   "priority": "High",
-   "area": "SEO",
-   "owner": "Ruchi",
-   "effort": "M",
-   "impact": "Medium",
-   "status": "To do",
-   "title": "Replace links to old addresses with the real page address",
-   "why": "55 old addresses still get crawled because pages link to them, some through 2-3 redirects in a row (e.g. /aqua-spazio-radiata goes through 3 hops). Direct links are faster and pass more value.",
-   "steps": [
-    "Use the 'Fix in this post' column in the Internal links tab",
-    "Check menus and footers for old addresses too"
-   ]
+    "Delete 'copy of' page, 301 to the real one"
+   ],
+   "notes": "Ruchi: done."
   }
  ]
 }
