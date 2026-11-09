@@ -893,6 +893,221 @@
   ],
   "note": "Most new domains since May 2026 are unrelated foreign sites (e.g. karawanier.com, bannerkencana.com, kingbueno.com). They add little and can look like bought links."
  },
+ "pool": {
+  "site": "swimmingpoolcompany.co.uk",
+  "gscWindow": "10 Oct – 6 Nov 2026 (28 days)",
+  "kpis": [
+   {
+    "label": "Google clicks",
+    "value": 143,
+    "fmt": "int",
+    "prev": 56,
+    "note": "last 28 days",
+    "good": "up"
+   },
+   {
+    "label": "Google impressions",
+    "value": 53919,
+    "fmt": "int",
+    "prev": 25878,
+    "note": "last 28 days",
+    "good": "up"
+   },
+   {
+    "label": "New leads, October",
+    "value": 2,
+    "fmt": "int",
+    "note": "website form + info@, new people only",
+    "alert": true
+   },
+   {
+    "label": "Real (UK) visitors",
+    "value": 154,
+    "fmt": "int",
+    "note": "GA4, 10 Oct–8 Nov, 64% engaged"
+   },
+   {
+    "label": "US visitors (bots)",
+    "value": 174,
+    "fmt": "int",
+    "note": "7% engaged, only 2 US Google clicks",
+    "alert": true
+   },
+   {
+    "label": "Audit issues that matter",
+    "value": 3,
+    "fmt": "int",
+    "note": "78 pages crawled; rest are tag pages"
+   }
+  ],
+  "monthly": [
+   [
+    "Jun 26",
+    15,
+    5210,
+    1
+   ],
+   [
+    "Jul 26",
+    20,
+    7133,
+    2
+   ],
+   [
+    "Aug 26",
+    14,
+    8467,
+    6
+   ],
+   [
+    "Sep 26",
+    38,
+    21062,
+    4
+   ],
+   [
+    "Oct 26",
+    112,
+    52642,
+    2
+   ]
+  ],
+  "queries": [
+   [
+    "the swimming pool company",
+    21,
+    206,
+    2.1
+   ],
+   [
+    "swimming pool company",
+    13,
+    985,
+    12.9
+   ],
+   [
+    "swimming pool company london",
+    3,
+    1049,
+    6.5
+   ],
+   [
+    "london swimming pool company",
+    1,
+    537,
+    11.3
+   ],
+   [
+    "pool designer london",
+    1,
+    478,
+    16.3
+   ],
+   [
+    "swimming pool contractors",
+    1,
+    926,
+    22.1
+   ],
+   [
+    "bespoke swimming pool design",
+    0,
+    459,
+    2.2
+   ],
+   [
+    "basement swimming pool company",
+    0,
+    471,
+    6.3
+   ],
+   [
+    "commercial pool contractor london",
+    0,
+    456,
+    13.9
+   ]
+  ],
+  "pages": [
+   [
+    "/",
+    95,
+    65551,
+    23.6
+   ],
+   [
+    "/post/cold-plunge-pools-for-uk-homes-benefits-buying-guide",
+    16,
+    863,
+    16.6
+   ],
+   [
+    "/outdoor-pool-prices",
+    13,
+    4393,
+    20.0
+   ],
+   [
+    "/post/how-much-does-an-indoor-swimming-pool-cost-in-the-uk-in-2026",
+    13,
+    2877,
+    19.6
+   ],
+   [
+    "/indoor-pool-prices",
+    6,
+    1872,
+    51.5
+   ],
+   [
+    "/swimming-pool-prices",
+    2,
+    4182,
+    30.5
+   ],
+   [
+    "/contact",
+    3,
+    5038,
+    81.7
+   ]
+  ],
+  "sources": [
+   [
+    "Direct (mostly bots)",
+    331,
+    13
+   ],
+   [
+    "Google organic",
+    178,
+    63
+   ],
+   [
+    "ChatGPT",
+    17,
+    53
+   ],
+   [
+    "LinkedIn",
+    11,
+    45
+   ],
+   [
+    "Instagram",
+    16,
+    56
+   ]
+  ],
+  "findings": [
+   "Google clicks more than doubled in the last 28 days (143 vs 56), but new leads stayed at 2–3 a month: visitors arrive but don't enquire.",
+   "No commercial pools page: commercial pool searches got ~5,200 impressions at position ~40 and 0 clicks.",
+   "Price pages rank too low: /swimming-pool-prices position 30, /indoor-pool-prices position 51.",
+   "'bespoke swimming pool design' ranks 2.2 with 459 impressions and 0 clicks: the Google snippet needs rewriting.",
+   "US, Singapore and China visits are bots (one visit each, almost no engagement). Judge the site on UK + Google organic only.",
+   "Site audit (78 pages): no broken links, orphans or empty pages; only 3 pages with heading-order issues."
+  ]
+ },
  "tasks": [
   {
    "id": "L3",

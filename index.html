@@ -92,13 +92,13 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
 <div class="wrap">
   <header class="top">
     <div>
-      <h1>Sauna Company · Digital Marketing</h1>
+      <h1>Sauna &amp; Pool Company · Digital Marketing</h1>
       <div class="sub" id="updated">Loading…</div>
     </div>
     <div class="links" id="toplinks"></div>
   </header>
   <nav class="jump" aria-label="Sections">
-    <a href="#overview">Overview</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
+    <a href="#overview">Overview</a><a href="#pool">Pool site</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
     <a href="#keywords">Keywords</a><a href="#competitors">Competitors</a><a href="#local">Google local</a>
     <a href="#content">Blog</a><a href="#social">Social</a><a href="#technical">Technical</a>
   </nav>
@@ -119,7 +119,7 @@ function render(d) {
   $('#updated').textContent = `Data snapshot ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · ${d.meta.site}`;
   $('#toplinks').innerHTML = Object.entries(d.meta.links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
   const urgent = d.tasks.filter((t) => t.priority === 'Urgent' && t.status !== 'Done').length;
-  $('#app').innerHTML = [overview(d, urgent), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
+  $('#app').innerHTML = [overview(d, urgent), poolSec(d), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
   wireFilters(d);
 }
 
@@ -139,6 +139,29 @@ function overview(d, urgent) {
     <div><b>Content:</b> 27 blog posts, but several repeat each other and split their rankings. Big searches like "outdoor sauna" (9,900/month) and "garden sauna" (4,400) have weak pages; "basement sauna" and "commercial sauna" have none.</div>
     <div><b>This week:</b> ${urgent} urgent tasks below. Start with the empty posts, broken addresses and noindex fix (S1–S3), the pool site's quote buttons (P1) and the Aqua Spazio form test (L4).</div>
   </div></section>`;
+}
+
+function poolSec(d) {
+  const p = d.pool; if (!p) return '';
+  const tiles = p.kpis.map((k) => {
+    const val = k.fmt === 'int' ? n0(k.value) : esc(k.value);
+    const dl = k.prev != null ? `${arrow(pctChange(k.value, k.prev), k.good)} vs previous 28 days` : `<span class="note">${esc(k.note)}</span>`;
+    return `<div class="kpi${k.alert ? ' alert' : ''}"><div class="lbl">${esc(k.label)}</div><div class="big">${val}</div><div class="delta">${dl}</div>${k.prev != null ? `<div class="note">${esc(k.note)}</div>` : ''}</div>`;
+  }).join('');
+  const row = (cells) => `<tr>${cells.map((c, i) => `<td${i ? ' class="num"' : ''}>${typeof c === 'number' ? n0(c) : esc(c)}</td>`).join('')}</tr>`;
+  const tbl = (head, rows) => `<div class="tablewrap"><table><thead><tr>${head.map((x, i) => `<th${i ? ' class="num"' : ''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(row).join('')}</tbody></table></div>`;
+  return `<section class="card" id="pool"><div class="card-head"><h2>Swimming Pool Company</h2><span class="note">${esc(p.site)} · Search data: ${esc(p.gscWindow)}</span></div>
+  <div class="kpis">${tiles}</div>
+  <div class="summary">${p.findings.map((f) => `<div>${esc(f)}</div>`).join('')}</div>
+  <h3 style="font-size:16px;margin:16px 0 8px">Month by month: Google clicks vs new leads</h3>
+  ${tbl(['Month', 'Clicks', 'Impressions', 'New leads'], p.monthly)}
+  <h3 style="font-size:16px;margin:16px 0 8px">Top searches (last 3 months)</h3>
+  ${tbl(['Search', 'Clicks', 'Impr.', 'Pos.'], p.queries)}
+  <h3 style="font-size:16px;margin:16px 0 8px">Pages (last 3 months)</h3>
+  ${tbl(['Page', 'Clicks', 'Impr.', 'Pos.'], p.pages)}
+  <h3 style="font-size:16px;margin:16px 0 8px">Where visitors come from (GA4, 10 Oct – 8 Nov)</h3>
+  ${tbl(['Source', 'Sessions', 'Engaged %'], p.sources)}
+  <p class="note">Pool tasks P1–P8 are in the task list below (filter: Pool website).</p></section>`;
 }
 
 function tasks(d) {
