@@ -188,7 +188,7 @@ function loadLive(d) {
     d.tasks = j.tasks.map((r) => ({
       id: r['ID'], priority: PRI[r['Priority']] || 'Medium', area: r['Area'], site: r['Site'], owner: 'Ruchi',
       status: ST[r['Status']] || r['Status'] || 'To do', rawStatus: r['Status'], due: r['Target date'], done_on: r['Date done'],
-      title: r['Task'], why: r['Why (source)'], steps: steps(r['Pages / detail']), notes: r["Ruchi's notes / proof link"] }));
+      title: r['Task'], why: r['Why (source)'], steps: steps(r['Pages / detail']), notes: r["Ruchi's notes / proof link"], minutes: Number(r['Time spent (min)']) || 0 }));
     d.log = j.log || [];
     d.liveAt = j.at;
     return d;
@@ -196,7 +196,7 @@ function loadLive(d) {
 }
 const ukDate = (s) => { const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ''); return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null; };
 const isoDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
-const dayKey = (dt) => dt.toISOString().slice(0, 10);
+const hm = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${m % 60 ? (m % 60) + 'm' : ''}`.trim() : `${m}m`);
 function progress(d) {
   return `<section class="card" id="progress"><div class="card-head"><h2>Progress: what's been done</h2><span class="note">${d.live ? `Live from the task tracker · ${esc(d.liveAt)}` : 'From the last saved task list'}</span></div>
   <div class="rng" id="rng"><span class="note">Show:</span>${[['today', 'Today'], ['yesterday', 'Yesterday'], ['week', 'Last 7 days'], ['month', 'This month'], ['all', 'All']].map(([k, l], i) => `<button data-r="${k}" class="${i === 0 ? '' : 'off'}" style="${i === 0 ? '' : 'background:var(--card);color:var(--ink)'}">${l}</button>`).join('')}
@@ -214,9 +214,10 @@ function wireProgress(d) {
     const open = d.tasks.filter((t) => t.status !== 'Done').length;
     out.innerHTML = `<div class="kpis"><div class="kpi"><div class="lbl">Completed · ${esc(label)}</div><div class="big">${done.size}</div></div>
       <div class="kpi"><div class="lbl">Updates · ${esc(label)}</div><div class="big">${ups.length}</div></div>
+      <div class="kpi"><div class="lbl">Time spent · ${esc(label)}</div><div class="big">${hm(ups.reduce((a, l) => a + (l.minutes || 0), 0))}</div></div>
       <div class="kpi"><div class="lbl">Still open (all)</div><div class="big">${open}</div></div></div>
       <h3 style="font-size:16px;margin:14px 0 6px">Completed</h3>${done.size ? [...done.values()].map((x) => `<div class="logitem"><b>${esc(x.id)}</b> ${esc(x.title)} <span class="when">· ${esc(x.when)}</span></div>`).join('') : '<p class="note">Nothing completed in this period.</p>'}
-      <h3 style="font-size:16px;margin:14px 0 6px">All updates and comments</h3>${ups.length ? ups.map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)}</div><b>${esc(l.id)}</b> ${esc(l.task)} — ${esc(l.from)} → ${esc(l.to)}${l.comment ? `<div>${esc(l.comment)}</div>` : ''}</div>`).join('') : `<p class="note">${d.live ? 'No updates in this period.' : 'Updates appear here once the tracker connection is switched on.'}</p>`}`;
+      <h3 style="font-size:16px;margin:14px 0 6px">All updates and comments</h3>${ups.length ? ups.map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)}</div><b>${esc(l.id)}</b> ${esc(l.task)} — ${esc(l.from)} → ${esc(l.to)}${l.minutes ? ` · ${hm(l.minutes)}` : ''}${l.comment ? `<div>${esc(l.comment)}</div>` : ''}</div>`).join('') : `<p class="note">${d.live ? 'No updates in this period.' : 'Updates appear here once the tracker connection is switched on.'}</p>`}`;
   };
   const range = (k) => {
     const t = new Date(); t.setHours(0, 0, 0, 0); const end = new Date(t); end.setHours(23, 59, 59);
@@ -242,6 +243,7 @@ function updForm(d, t) {
   return `<form class="upd" data-id="${esc(t.id)}"><b>Update this task</b>
     <select name="status" aria-label="Status">${opts}</select>
     <textarea name="comment" rows="2" placeholder="What did you do? Add a link as proof."></textarea>
+    <input name="minutes" type="number" min="0" max="600" step="5" placeholder="Time spent (minutes)" inputmode="numeric">
     <input name="key" type="password" placeholder="Passcode" value="${esc(getKey())}" autocomplete="off">
     <button type="submit">Save</button><span class="msg"></span></form>`;
 }
@@ -250,7 +252,7 @@ function wireUpdates(d) {
   document.querySelectorAll('form.upd').forEach((f) => f.addEventListener('submit', (e) => {
     e.preventDefault();
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
-    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, key: f.key.value, by: 'Ruchi' };
+    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value, by: 'Ruchi' };
     fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
       if (!j.ok) { msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode.' : 'Could not save: ' + j.error; return; }
       setKey(body.key); msg.textContent = 'Saved.';
@@ -263,7 +265,7 @@ function tasks(d) {
   const areas = [...new Set(d.tasks.map((t) => t.area))];
   const cards = d.tasks.map((t) => `<details class="task" data-p="${esc(t.priority)}" data-a="${esc(t.area)}">
     <summary><span class="tid">${esc(t.id)}</span><span class="ttl">${esc(t.title)}</span><span class="pill p-${esc(t.priority)}">${esc(t.priority)}</span>
-      <span class="meta"><span>${esc(t.area)}</span>${t.site ? `·<span>${esc(t.site)}</span>` : ''}·<span>Owner: ${esc(t.owner)}</span>${t.due ? `·<span>Due ${esc(t.due)}</span>` : ''}·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
+      <span class="meta"><span>${esc(t.area)}</span>${t.site ? `·<span>${esc(t.site)}</span>` : ''}·<span>Owner: ${esc(t.owner)}</span>${t.due ? `·<span>Due ${esc(t.due)}</span>` : ''}·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}${t.minutes ? `<span>· ${hm(t.minutes)} spent</span>` : ''}</span></summary>
     <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>${t.notes ? `<p class="why" style="white-space:pre-line"><b>Ruchi's notes:</b> ${esc(t.notes)}</p>` : ''}${updForm(d, t)}</div></details>`).join('');
   return `<section class="card" id="tasks"><div class="card-head"><h2>Do this: prioritised task list</h2><span class="note">Tap a task for the why and the steps. Ruchi updates status in the <a href="${esc(d.meta.taskSheet)}" target="_blank" rel="noopener">task tracker</a>; this list is synced from it.</span></div>
   <div class="filters" id="filters"><button class="on" data-f="all">All (${d.tasks.length})</button>${['Urgent', 'High', 'Medium'].map((p) => `<button data-f="p:${p}">${p} (${d.tasks.filter((t) => t.priority === p).length})</button>`).join('')}${areas.map((a) => `<button data-f="a:${esc(a)}">${esc(a)}</button>`).join('')}</div>

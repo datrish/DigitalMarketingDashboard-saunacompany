@@ -22,7 +22,7 @@ function doGet() {
   });
   const lg = ss.getSheetByName(LOG_TAB).getDataRange().getDisplayValues().slice(1)
     .filter((r) => r[0])
-    .map((r) => ({ when: r[0], id: r[1], task: r[2], from: r[3], to: r[4], comment: r[5], by: r[6] }));
+    .map((r) => ({ when: r[0], id: r[1], task: r[2], from: r[3], to: r[4], comment: r[5], by: r[6], minutes: Number(r[7]) || 0 }));
   return json({ ok: true, tasks: tasks, log: lg.slice(-500), at: now() });
 }
 
@@ -40,6 +40,7 @@ function doPost(e) {
     const col = (name) => head.indexOf(name) + 1;
     const cId = col('ID'), cTask = col('Task'), cStatus = col('Status'), cDone = col('Date done');
     const cNotes = head.findIndex((h) => h.indexOf('notes') !== -1) + 1;
+    const cTime = col('Time spent (min)');
     const rowIdx = data.findIndex((r, i) => i > 0 && r[cId - 1] === String(p.id));
     if (rowIdx < 1) return json({ ok: false, error: 'task not found' });
     const row = rowIdx + 1;
@@ -52,14 +53,19 @@ function doPost(e) {
     }
     const comment = String(p.comment || '').slice(0, 1000).trim();
     const by = String(p.by || 'Ruchi').slice(0, 40);
+    const minutes = Math.max(0, Math.min(600, Math.round(Number(p.minutes) || 0)));
+    if (minutes && cTime > 0) {
+      const prevMin = Number(data[rowIdx][cTime - 1]) || 0;
+      sh.getRange(row, cTime).setValue(prevMin + minutes);
+    }
     if (comment && cNotes > 0) {
       const prev = data[rowIdx][cNotes - 1];
       const stamp = Utilities.formatDate(new Date(), TZ, 'dd/MM HH:mm');
       sh.getRange(row, cNotes).setValue((prev ? prev + '\n' : '') + stamp + ' ' + by + ': ' + comment);
     }
-    if (status !== old || comment) {
+    if (status !== old || comment || minutes) {
       SpreadsheetApp.getActive().getSheetByName(LOG_TAB)
-        .appendRow([now(), p.id, data[rowIdx][cTask - 1], old, status, comment, by]);
+        .appendRow([now(), p.id, data[rowIdx][cTask - 1], old, status, comment, by, minutes || '']);
     }
     return json({ ok: true, id: p.id, status: status });
   } finally {
