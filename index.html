@@ -34,7 +34,7 @@ header.top { padding: 22px 0 6px; }
 header.top h1 { font-size: 24px; }
 .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
 nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 10px 0; margin-bottom: 8px; }
-nav.tabs .seg { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
+nav.tabs .seg { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
 nav.tabs a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; padding: 8px 4px; border-radius: 9px; }
 nav.tabs a[aria-current="page"] { background: var(--ink); color: var(--card); }
 nav.tabs a .n { font-weight: 500; opacity: .75; margin-left: 4px; font-variant-numeric: tabular-nums; }
@@ -124,6 +124,27 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
 @media (prefers-reduced-motion: no-preference) { .task[open] .body { animation: open .18s ease-out; } @keyframes open { from { opacity: 0; transform: translateY(-4px); } } }
 .chipb { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .chipb[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.chan { background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--sauna); border-radius: 12px; padding: 14px 16px; }
+.chan.pool { border-left-color: var(--pool); }
+.chead { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+.live { margin: 0 0 4px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; color: var(--good); }
+.live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+.live.off { color: var(--bad); } .live.off .dot { background: var(--bad); }
+.ptitle { font-weight: 600; display: block; margin-bottom: 8px; }
+.checks { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 13px; }
+.checks div { display: flex; justify-content: space-between; gap: 6px; }
+.ck { font-weight: 600; } .ck.yes { color: var(--good); } .ck.no { color: var(--bad); }
+.sub2 { font-size: 13px; font-weight: 600; color: var(--muted); margin: 12px 0 4px; }
+.li { display: flex; flex-direction: column; padding: 5px 0; border-top: 1px solid var(--line); font-size: 14px; }
+.li:first-of-type { border-top: 0; }
+.attn { border-color: var(--bad); background: var(--bad-bg); }
+.attn h2 { font-size: 17px; color: var(--bad); margin-bottom: 6px; }
+.attn ul { margin: 0; padding-left: 18px; font-size: 14px; } .attn li { margin-bottom: 4px; }
+.warnb { background: var(--bad-bg); } .warnb .lbl { color: var(--bad); }
+.big.sm, .big .sm { font-size: 18px; }
+nav.tabs a .n:empty { display: none; }
+#n-warn { color: var(--bad); opacity: 1; }
+nav.tabs a[aria-current="page"] #n-warn { color: inherit; }
 </style>
 </head>
 <body>
@@ -133,6 +154,7 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
     <div class="sub" id="updated">Loading…</div>
   </header>
   <nav class="tabs" aria-label="Views"><div class="seg">
+    <a href="#today" data-v="today">Today<span class="n" id="n-warn" aria-label="warnings"></span></a>
     <a href="#todo" data-v="todo">To do<span class="n" id="n-todo"></span></a>
     <a href="#done" data-v="done">Done</a>
     <a href="#results" data-v="results">Results</a>
@@ -169,6 +191,7 @@ function loadLive(d) {
       status: ST[r['Status']] || r['Status'] || 'To do', rawStatus: r['Status'], due: r['Target date'], done_on: r['Date done'],
       title: r['Task'], why: r['Why (source)'], steps: steps(r['Pages / detail']), notes: r["Ruchi's notes / proof link"], minutes: Number(r['Time spent (min)']) || 0 }));
     d.log = j.log || [];
+    if (j.pulse) d.pulse = j.pulse;
     d.liveAt = j.at;
     return d;
   }).catch(() => d);
@@ -279,18 +302,57 @@ function render(d) {
   $('#updated').textContent = d.live ? `Tasks live from the tracker · ${d.liveAt}` : `Last saved ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`;
   const open = d.tasks.filter((t) => t.status !== 'Done');
   $('#n-todo').textContent = open.length;
-  $('#app').innerHTML = `<div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div>
+  const warns = pulseWarnings(d);
+  $('#n-warn').textContent = warns.length ? warns.length : '';
+  $('#app').innerHTML = `<div class="view" id="v-today">${todayView(d, warns)}</div><div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div>
     <div class="view" id="v-results">${resultsView(d)}</div><div class="view" id="v-details">${detailsView(d)}</div>`;
   wireTodo(d); wireProgress(d); wireUpdates(d); route();
 }
 function route() {
-  let v = (location.hash || '#todo').slice(1);
+  let v = (location.hash || '#today').slice(1);
   v = { progress: 'done', pool: 'results', overview: 'results', tasks: 'todo' }[v] || v;
-  if (!['todo', 'done', 'results', 'details'].includes(v)) v = 'todo';
+  if (!['today', 'todo', 'done', 'results', 'details'].includes(v)) v = 'today';
   document.querySelectorAll('.view').forEach((x) => (x.hidden = x.id !== 'v-' + v));
   document.querySelectorAll('nav.tabs a').forEach((a) => (a.dataset.v === v ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
 window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); });
+
+// ---------- Today (channel pulse) ----------
+const fmtD = (s) => { const d = isoDate(s); return d ? d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }) : esc(s || ''); };
+const daysAgo = (s) => { const d = isoDate(s); if (!d) return null; const t = new Date(); t.setHours(0, 0, 0, 0); return Math.round((t - d) / 86400000); };
+function pulseWarnings(d) {
+  const P = d.pulse; if (!P) return [];
+  const w = [];
+  (P.blogs || []).forEach((b) => (b.warn || []).forEach((x) => w.push([b.site, 'Blog', x])));
+  (P.social || []).forEach((s) => (s.warn || []).forEach((x) => w.push([s.site, 'Social', x])));
+  (P.gbp || []).forEach((g) => { (g.warn || []).forEach((x) => w.push([g.site, 'Google profile', x])); const a = daysAgo(g.lastPost); if (a != null && a > 7) w.push([g.site, 'Google profile', `No post for ${a} days`]); });
+  return w;
+}
+function todayView(d, warns) {
+  const P = d.pulse;
+  if (!P) return '<p class="empty">No channel check yet. It runs at about 8am and 6pm on weekdays.</p>';
+  const ok = (v) => `<span class="ck ${v ? 'yes' : 'no'}">${v ? 'Yes' : 'Missing'}</span>`;
+  const siteTag = (s) => `<span class="site ${s}">${s === 'Pool' ? 'Pool' : 'Sauna'}</span>`;
+  const blog = (P.blogs || []).map((b) => `<div class="chan ${b.site === 'Pool' ? 'pool' : ''}">
+    <div class="chead">${siteTag(b.site)}<span class="note">${b.scheduled} scheduled</span></div>
+    ${b.today ? `<p class="live"><span class="dot"></span>Live today</p><a class="ptitle" href="${esc(b.today.url)}" target="_blank" rel="noopener">${esc(b.today.title)}</a>
+      <div class="checks">${Object.entries(b.today.checks).map(([k, v]) => `<div>${esc(k)} ${ok(v)}</div>`).join('')}</div>`
+      : `<p class="live off"><span class="dot"></span>Nothing went live today</p>`}
+    ${(b.recent || []).length ? `<div class="sub2">Recent</div>${b.recent.map((r) => `<div class="li"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a><span class="note">${fmtD(r.date)}${r.issues.length ? ` · <span class="bad">${esc(r.issues.join(', '))}</span>` : ''}</span></div>`).join('')}` : ''}
+    ${(b.next || []).length ? `<div class="sub2">Coming up</div>${b.next.map((n) => `<div class="li"><span>${esc(n.title)}</span><span class="note">${fmtD(n.date)}</span></div>`).join('')}` : ''}</div>`).join('');
+  const social = (P.social || []).map((s) => `<div class="chan ${s.site === 'Pool' ? 'pool' : ''}"><div class="chead">${siteTag(s.site)}<span class="note">${esc(s.networks)}</span></div>
+    <div class="nums"><div class="num-b${s.queued7 < 3 ? ' warnb' : ''}"><div class="lbl">Queued, next 7 days</div><div class="big">${s.queued7}</div></div>
+    <div class="num-b"><div class="lbl">Next post</div><div class="big sm">${s.next ? fmtD(s.next) : 'None'}</div></div></div></div>`).join('');
+  const gbp = (P.gbp || []).map((g) => { const a = daysAgo(g.lastPost); return `<div class="chan ${g.site === 'Pool' ? 'pool' : ''}"><div class="chead">${siteTag(g.site)}<a class="note" href="${esc(g.url)}" target="_blank" rel="noopener">Open on Google</a></div>
+    <div class="nums"><div class="num-b${g.reviews < 10 ? ' warnb' : ''}"><div class="lbl">Reviews</div><div class="big">${g.rating}★ <span class="sm">(${g.reviews})</span></div></div>
+    <div class="num-b${a != null && a > 7 ? ' warnb' : ''}"><div class="lbl">Last post</div><div class="big sm">${a === 0 ? 'Today' : a === 1 ? 'Yesterday' : a != null ? a + ' days ago' : '–'}</div><div class="delta note">${g.posts7} posts in 7 days</div></div>
+    <div class="num-b"><div class="lbl">Photos</div><div class="big">${g.photos}</div></div></div></div>`; }).join('');
+  return `<p class="lede">Blog, social media and Google profile for both businesses. Checked at about 8am and 6pm on weekdays; last check ${esc(P.updated)}.</p>
+  ${warns.length ? `<div class="panel attn"><h2>Needs attention</h2><ul>${warns.map(([s, c, x]) => `<li><span class="site ${s}">${s}</span> · ${esc(c)}: ${esc(x)}</li>`).join('')}</ul></div>` : '<div class="panel"><b>All on track.</b></div>'}
+  <div class="group"><h2>Blog</h2></div><div class="split">${blog}</div>
+  <div class="group"><h2>Social media (Metricool)</h2></div><div class="split">${social}</div>
+  <div class="group"><h2>Google Business Profile</h2></div><div class="split">${gbp}</div>`;
+}
 
 // ---------- To do ----------
 function taskCard(d, t) {

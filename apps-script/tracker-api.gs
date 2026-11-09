@@ -23,7 +23,10 @@ function doGet() {
   const lg = ss.getSheetByName(LOG_TAB).getDataRange().getDisplayValues().slice(1)
     .filter((r) => r[0])
     .map((r) => ({ when: r[0], id: r[1], task: r[2], from: r[3], to: r[4], comment: r[5], by: r[6], minutes: Number(r[7]) || 0 }));
-  return json({ ok: true, tasks: tasks, log: lg.slice(-500), at: now() });
+  let pulse = null;
+  const ps = ss.getSheetByName('Pulse');
+  if (ps) { try { pulse = JSON.parse(ps.getRange('B1').getValue()); } catch (err) { pulse = null; } }
+  return json({ ok: true, tasks: tasks, log: lg.slice(-500), pulse: pulse, at: now() });
 }
 
 function doPost(e) {
