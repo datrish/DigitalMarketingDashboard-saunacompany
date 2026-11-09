@@ -40,6 +40,10 @@ nav.tabs a[aria-current="page"] { background: var(--ink); color: var(--card); }
 nav.tabs a .n { font-weight: 500; opacity: .75; margin-left: 4px; font-variant-numeric: tabular-nums; }
 .view[hidden] { display: none; }
 .lede { font-size: 15px; color: var(--muted); margin: 6px 0 14px; max-width: 62ch; }
+.kwbox { min-width: 0; } .kwbox th, .kwbox td { padding-left: 6px; padding-right: 6px; } .kwbox th.num { white-space: normal; width: 64px; } .kwbox .sub2 { margin: 6px 0; }
+.pill.s-new { background: #e4f1e6; color: #24613a; font-size: 11.5px; padding: 1px 7px; }
+.panel.mentor { border-left: 4px solid var(--ink); } .panel.mentor li { margin: 0 0 8px; } .panel.mentor .site { margin-right: 4px; }
+.good { color: #24613a; font-size: 13px; } .delta .bad { font-size: 13px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
 .chips button { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .chips button[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
@@ -308,7 +312,7 @@ function render(d) {
   $('#n-warn').textContent = warns.length ? warns.length : '';
   $('#app').innerHTML = `<div class="view" id="v-today">${todayView(d, warns)}</div><div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div><div class="view" id="v-social">${socialView(d)}</div>
     <div class="view" id="v-results">${resultsView(d)}</div><div class="view" id="v-details">${detailsView(d)}</div>`;
-  wireTodo(d); wireProgress(d); wireUpdates(d); wireSocial(d); route();
+  wireTodo(d); wireProgress(d); wireUpdates(d); wireSocial(d); wireDetails(); route();
 }
 function route() {
   let v = (location.hash || '#today').slice(1);
@@ -349,11 +353,34 @@ function todayView(d, warns) {
     <div class="nums"><div class="num-b${g.reviews < 10 ? ' warnb' : ''}"><div class="lbl">Reviews</div><div class="big">${g.rating}★ <span class="sm">(${g.reviews})</span></div></div>
     <div class="num-b${a != null && a > 7 ? ' warnb' : ''}"><div class="lbl">Last post</div><div class="big sm">${a === 0 ? 'Today' : a === 1 ? 'Yesterday' : a != null ? a + ' days ago' : '–'}</div><div class="delta note">${g.posts7} posts in 7 days</div></div>
     <div class="num-b"><div class="lbl">Photos</div><div class="big">${g.photos}</div></div></div></div>`; }).join('');
-  return `<p class="lede">Blog, social media and Google profile for both businesses. Checked at about 8am and 6pm on weekdays; last check ${esc(P.updated)}.</p>
+  return `<p class="lede">Leads, Google, blog, social media and Google profile for both businesses. Checked at about 8am and 6pm on weekdays; last check ${esc(P.updated)}.</p>
+  ${weekBlock(P.week)}
   ${warns.length ? `<div class="panel attn"><h2>Needs attention</h2><ul>${warns.map(([s, c, x]) => `<li><span class="site ${s}">${s}</span> · ${esc(c)}: ${esc(x)}</li>`).join('')}</ul></div>` : '<div class="panel"><b>All on track.</b></div>'}
   <div class="group"><h2>Blog</h2></div><div class="split">${blog}</div>
   <div class="group"><h2>Social media (Metricool)</h2></div><div class="split">${social}</div>
   <div class="group"><h2>Google Business Profile</h2></div><div class="split">${gbp}</div>`;
+}
+
+
+function weekBlock(W) {
+  if (!W) return '';
+  const tag = (s) => `<span class="site ${s}">${s === 'Both' ? 'Both' : s}</span>`;
+  const chg = (a, b, good) => { if (b == null || a === b) return '<span class="note">same</span>'; const up = a > b; return `<span class="${up === good ? 'good' : 'bad'}">${up ? '▲' : '▼'} from ${n0(b)}</span>`; };
+  const leads = (W.leads || []).map((l) => `<div class="num-b"><div class="lbl">${tag(l.site)} new leads</div><div class="big">${l.thisWeek}</div>
+    <div class="delta note">so far this week · last week ${l.lastWeek} · week before ${l.weekBefore}</div></div>`).join('');
+  const srch = (W.search || []).map((s) => `<div class="chan ${s.site === 'Pool' ? 'pool' : ''}"><div class="chead">${tag(s.site)}<span class="note">Google, UK</span></div>
+    <div class="nums"><div class="num-b"><div class="lbl">Times shown</div><div class="big">${n0(s.impr)}</div><div class="delta">${chg(s.impr, s.imprPrev, true)}</div></div>
+    <div class="num-b"><div class="lbl">Clicks</div><div class="big">${n0(s.clicks)}</div><div class="delta">${chg(s.clicks, s.clicksPrev, true)}</div></div>
+    <div class="num-b"><div class="lbl">Click rate (CTR)</div><div class="big">${s.ctr}%</div><div class="delta">${s.ctr === s.ctrPrev ? '<span class="note">same</span>' : `<span class="${s.ctr > s.ctrPrev ? 'good' : 'bad'}">${s.ctr > s.ctrPrev ? '▲' : '▼'} from ${s.ctrPrev}%</span>`}</div></div></div></div>`).join('');
+  const kws = (site) => { const k = (W.keywords || []).filter((x) => x.site === site).slice(0, 8); if (!k.length) return '';
+    return `<div class="kwbox"><div class="sub2">${tag(site)} keywords moving up</div><div class="tablewrap"><table><thead><tr><th>Search</th><th class="num">UK searches a month</th><th class="num">Now</th><th class="num">Was</th></tr></thead><tbody>
+    ${k.map((x) => `<tr><td>${esc(x.kw)}${x.kind === 'new' ? ' <span class="pill s-new">New top 20</span>' : ''}</td><td class="num">${n0(x.vol)}</td><td class="num">${x.pos}</td><td class="num">${x.prev == null ? '–' : x.prev}</td></tr>`).join('')}</tbody></table></div></div>`; };
+  const mentor = (W.mentor || []).length ? `<div class="panel mentor"><h2>What to do about it</h2><ul>${W.mentor.map((m) => `<li>${tag(m.site)} ${esc(m.text)}</li>`).join('')}</ul><p class="note">${esc(W.mentorNote || '')}</p></div>` : '';
+  return `<div class="group"><h2>This week</h2></div>
+  <div class="panel"><div class="nums">${leads}</div><p class="note" style="margin-top:8px">${esc(W.leadsWindow || '')} ${esc(W.leadsNote || '')}</p></div>
+  <div class="split">${srch}</div><p class="note">${esc(W.searchWindow || '')}</p>
+  <div class="split">${kws('Sauna')}${kws('Pool')}</div><p class="note">${esc(W.keywordsNote || '')}</p>
+  ${mentor}`;
 }
 
 // ---------- To do ----------
@@ -553,26 +580,45 @@ function resultsView(d) {
 }
 
 // ---------- Details ----------
+function wireDetails() {
+  document.querySelectorAll('#dsite button').forEach((b) => b.addEventListener('click', () => {
+    STATE.dsite = b.dataset.d;
+    document.querySelectorAll('#dsite button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.dsec').forEach((s) => (s.hidden = s.dataset.d !== b.dataset.d));
+  }));
+}
 function detailsView(d) {
   const acc = (title, html, open) => `<details class="acc"${open ? ' open' : ''}><summary>${title}</summary><div class="in">${html}</div></details>`;
   const p = d.pool;
   const row = (cells) => `<tr>${cells.map((c, i) => `<td${i ? ' class="num"' : ''}>${typeof c === 'number' ? n0(c) : esc(c)}</td>`).join('')}</tr>`;
   const tbl = (head, rows) => `<div class="tablewrap"><table><thead><tr>${head.map((x, i) => `<th${i ? ' class="num"' : ''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(row).join('')}</tbody></table></div>`;
-  const poolHtml = `<ul class="plain" style="margin-bottom:12px">${p.findings.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+  const poolHtmlOld = `<ul class="plain" style="margin-bottom:12px">${p.findings.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
     <h3 style="font-size:15px;margin:12px 0 6px">Google clicks vs new leads</h3>${tbl(['Month', 'Clicks', 'Impressions', 'New leads'], p.monthly)}
     <h3 style="font-size:15px;margin:12px 0 6px">Top searches (3 months)</h3>${tbl(['Search', 'Clicks', 'Impr.', 'Pos.'], p.queries)}
     <h3 style="font-size:15px;margin:12px 0 6px">Pages (3 months)</h3>${tbl(['Page', 'Clicks', 'Impr.', 'Pos.'], p.pages)}
     <h3 style="font-size:15px;margin:12px 0 6px">Where visitors come from (GA4)</h3>${tbl(['Source', 'Sessions', 'Engaged %'], p.sources)}`;
-  return `<p class="lede">The full numbers behind the Results tab. Open a section when you need it.</p>
-    ${acc('Sauna: Google search, 12 months', search(d))}
-    ${acc('Sauna: pages that need work', pagesSec(d))}
-    ${acc('Sauna: keyword gaps', keywords(d))}
-    ${acc('Sauna: competitors', comps(d))}
-    ${acc('Sauna: Google Business Profile', local(d))}
-    ${acc('Sauna: blog', content(d))}
-    ${acc('Sauna: social media', social(d))}
-    ${acc('Sauna: technical and backlinks', technical(d))}
-    ${acc('Pool: search, pages and visitors', poolHtml)}
+  const P = d.pulse || {}, W = P.week || {};
+  const pk = (W.keywords || []).filter((x) => x.site === 'Pool');
+  const pg = (P.gbp || []).find((g) => g.site === 'Pool');
+  const pb = (P.blogs || []).find((b) => b.site === 'Pool');
+  const ps = (P.socialPosts || []).filter((x) => x.site === 'Pool');
+  const poolSecs = [
+    acc('Pool: what we found', `<ul class="plain">${p.findings.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`, true),
+    acc('Pool: Google search by month', tbl(['Month', 'Clicks', 'Impressions', 'New leads'], p.monthly)),
+    acc('Pool: top searches and pages (3 months)', `<h3 style="font-size:15px;margin:0 0 6px">Searches</h3>${tbl(['Search', 'Clicks', 'Impr.', 'Pos.'], p.queries)}<h3 style="font-size:15px;margin:12px 0 6px">Pages</h3>${tbl(['Page', 'Clicks', 'Impr.', 'Pos.'], p.pages)}`),
+    pk.length ? acc('Pool: keywords moving up this week', tbl(['Search', 'UK searches / month', 'Position', 'Before'], pk.map((x) => [x.kw, x.vol, x.pos, x.prev == null ? 'not ranked' : x.prev]))) : '',
+    acc('Pool: where visitors come from (GA4)', tbl(['Source', 'Sessions', 'Engaged %'], p.sources)),
+    pg ? acc('Pool: Google Business Profile', `<p>${esc(pg.name)}: ${pg.rating}★ from ${pg.reviews} reviews, ${pg.photos} photos, last post ${fmtD(pg.lastPost)} (${pg.posts7} in 7 days). <a href="${esc(pg.url)}" target="_blank" rel="noopener">Open on Google</a></p>`) : '',
+    pb ? acc('Pool: blog', `${(pb.recent || []).map((r) => `<div class="li"><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a><span class="note">${fmtD(r.date)}${r.issues.length ? ` · ${esc(r.issues.join(', '))}` : ''}</span></div>`).join('')}<p class="note">${pb.scheduled} scheduled.</p>`) : '',
+    ps.length ? acc('Pool: social media (30 days)', tbl(['Post', 'Reach', 'Interactions'], ps.map((x) => [`${x.network} · ${x.title}`, x.reach, x.interactions]))) : '',
+  ].join('');
+  const saunaSecs = [acc('Sauna: Google search, 12 months', search(d)), acc('Sauna: pages that need work', pagesSec(d)), acc('Sauna: keyword gaps', keywords(d)),
+    acc('Sauna: competitors', comps(d)), acc('Sauna: Google Business Profile', local(d)), acc('Sauna: blog', content(d)), acc('Sauna: social media', social(d)), acc('Sauna: technical and backlinks', technical(d))].join('');
+  const cur = STATE.dsite || 'Sauna';
+  return `<p class="lede">The full numbers behind the Results tab. Pick a business, then open a section.</p>
+    <div class="chips" id="dsite" role="group" aria-label="Choose business">${['Sauna', 'Pool'].map((k) => `<button data-d="${k}" aria-pressed="${cur === k}">${k === 'Sauna' ? 'The Sauna Company' : 'Swimming Pool Company'}</button>`).join('')}</div>
+    <div class="dsec" data-d="Sauna"${cur === 'Sauna' ? '' : ' hidden'}>${saunaSecs}</div>
+    <div class="dsec" data-d="Pool"${cur === 'Pool' ? '' : ' hidden'}>${poolSecs}</div>
     <div class="links">${Object.entries(d.meta.links).map(([k2, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k2)}</a>`).join('')}</div>`;
 }
 
