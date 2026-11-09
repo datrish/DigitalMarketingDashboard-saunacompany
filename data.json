@@ -1201,6 +1201,87 @@
     "Add 2–3 internal links using the query as anchor text",
     "Re-check positions after 4 weeks"
    ]
+  },
+  {
+   "id": "T19",
+   "priority": "Urgent",
+   "area": "Technical",
+   "owner": "Ruchi",
+   "effort": "S",
+   "impact": "High",
+   "status": "To do",
+   "title": "Fix the ~10 pages Google won't index",
+   "why": "Search Console (9 Nov): 82 not indexed vs 74 indexed. 55 are old addresses that redirect (normal) and 12 are blog tag pages (meant to be hidden). The real problems: 4 pages return 404, 1 blog post is set to noindex, 1 post Google rejected as thin, and 4 new case studies are not indexed.",
+   "steps": [
+    "Add 301 redirects (Wix > SEO > URL Redirect Manager): /home > /, /auroom-cala > /sauna-design, /copy-of-sauna-faq-s > /sauna-faq, /bespoke-saunas-lond > /bespoke-saunas-london",
+    "Post 'Designing your bespoke home sauna': SEO settings > turn ON 'Let search engines index this page'",
+    "Redirect 'Unveiling the advantages of custom home sauna designs' to 'Home Sauna UK: The Complete Guide'",
+    "Case studies royal-air-force-sauna, sauna-in-a-garage, luxury-loft-sauna, thames-view-sauna: check they have 300+ words of their own and real photos; link each from the case-studies page and one blog post; then Search Console > URL inspection > Request indexing",
+    "Delete the spam member profile 'evovexufix0213187'; turn off public member profiles (Wix > Members)"
+   ]
+  },
+  {
+   "id": "T20",
+   "priority": "Urgent",
+   "area": "Technical",
+   "owner": "Ruchi",
+   "effort": "S",
+   "impact": "High",
+   "status": "To do",
+   "title": "Check 3 blog posts that load empty for crawlers",
+   "why": "The 9 Nov site crawl got an empty page (0 words, no heading, no links) for 'Sauna cost UK 2026' (5,523 impressions, our 3rd best post), 'Halotherapy in saunas' and 'Sauna in Clapham'. Google still has them indexed, but if it sees them empty next time they can drop.",
+   "steps": [
+    "Search Console > URL inspection > paste each URL > Test live URL > View tested page > Screenshot",
+    "If the screenshot is blank: open the post in Wix, remove any broken embed/old block, Publish again, then Request indexing",
+    "Note the result in the Daily log"
+   ]
+  },
+  {
+   "id": "T21",
+   "priority": "High",
+   "area": "SEO",
+   "owner": "Ruchi",
+   "effort": "S",
+   "impact": "Medium",
+   "status": "To do",
+   "title": "Link to the 13 orphan pages",
+   "why": "13 pages have no links from other pages, including the salt sauna guide (47 clicks), Hampstead, Finnish installation and garden ideas posts, and About us. Google treats unlinked pages as unimportant.",
+   "steps": [
+    "Use the 'Internal links' tab: add the 'link to it from' links",
+    "Put About us in the main menu or footer",
+    "Re-run the OpenSEO site audit after: orphan count should be 0"
+   ]
+  },
+  {
+   "id": "T22",
+   "priority": "High",
+   "area": "Technical",
+   "owner": "Ruchi",
+   "effort": "M",
+   "impact": "Medium",
+   "status": "To do",
+   "title": "Speed up /sauna-prices (4.8 seconds)",
+   "why": "/sauna-prices is the 2nd most-visited page (172 views in 4 weeks) and the slowest page on the site (4.8 s server response). 64 of 128 pages are slow.",
+   "steps": [
+    "Compress the 14 images (WebP, under 200 KB each)",
+    "Remove unused apps/widgets from the page",
+    "Re-test in PageSpeed Insights (mobile) and note the score"
+   ]
+  },
+  {
+   "id": "T23",
+   "priority": "High",
+   "area": "SEO",
+   "owner": "Ruchi",
+   "effort": "M",
+   "impact": "Medium",
+   "status": "To do",
+   "title": "Replace links to old addresses with the real page address",
+   "why": "55 old addresses still get crawled because pages link to them, some through 2-3 redirects in a row (e.g. /aqua-spazio-radiata goes through 3 hops). Direct links are faster and pass more value.",
+   "steps": [
+    "Use the 'Fix in this post' column in the Internal links tab",
+    "Check menus and footers for old addresses too"
+   ]
   }
  ]
 }
