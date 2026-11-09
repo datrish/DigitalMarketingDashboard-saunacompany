@@ -238,7 +238,12 @@ function wireProgress(d) {
 function getKey() { try { return localStorage.getItem('trackerKey') || ''; } catch (e) { return ''; } }
 function setKey(k) { try { localStorage.setItem('trackerKey', k); } catch (e) {} }
 function updForm(d, t) {
-  if (!d.live) return '';
+  if (!d.live) return `<div class="upd"><b>Update this task</b>
+    <select disabled><option>Status</option></select>
+    <textarea rows="2" disabled placeholder="What did you do? Add a link as proof."></textarea>
+    <input type="number" disabled placeholder="Time spent (minutes)">
+    <button type="button" disabled style="opacity:.5;cursor:not-allowed">Save</button>
+    <span class="msg">Not switched on yet. Deepti needs to deploy the tracker script once; then Ruchi can save updates here.</span></div>`;
   const opts = ['Not started', 'In progress', 'Done', 'Blocked', 'Needs Deepti'].map((s) => `<option${(t.rawStatus || '') === s ? ' selected' : ''}>${s}</option>`).join('');
   return `<form class="upd" data-id="${esc(t.id)}"><b>Update this task</b>
     <select name="status" aria-label="Status">${opts}</select>
