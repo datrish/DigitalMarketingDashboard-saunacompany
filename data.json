@@ -1109,6 +1109,30 @@
    "Site audit (78 pages): no broken links, orphans or empty pages; only 3 pages with heading-order issues."
   ]
  },
+ "leads": {
+  "months": [
+   "Jun",
+   "Jul",
+   "Aug",
+   "Sep",
+   "Oct"
+  ],
+  "sauna": [
+   24,
+   23,
+   26,
+   24,
+   17
+  ],
+  "pool": [
+   1,
+   2,
+   6,
+   4,
+   2
+  ],
+  "note": "Sauna = Wix website forms (a few may be internal tests). Pool = website form + info@, new people only. No paid ads ran."
+ },
  "tasks": [
   {
    "id": "L3",

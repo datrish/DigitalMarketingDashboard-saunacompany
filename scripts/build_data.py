@@ -170,9 +170,13 @@ pool = {
     "US, Singapore and China visits are bots (one visit each, almost no engagement). Judge the site on UK + Google organic only.",
     "Site audit (78 pages): no broken links, orphans or empty pages; only 3 pages with heading-order issues."]}
 
+# Leads per month (new enquiries). Sauna: Wix website forms (may include a few internal tests); Pool: forms + info@, new people only.
+leads = {"months": ["Jun", "Jul", "Aug", "Sep", "Oct"], "sauna": [24, 23, 26, 24, 17], "pool": [1, 2, 6, 4, 2],
+         "note": "Sauna = Wix website forms (a few may be internal tests). Pool = website form + info@, new people only. No paid ads ran."}
+
 tasks = json.loads((ROOT / "scripts" / "tasks.json").read_text())
 
 out = dict(meta=meta, kpis=kpis, monthly=monthly, queries=queries, striking=striking, pages=pages, gaps=gaps,
-           competitors=competitors, local=local, blog=blog, social=social, audit=audit, backlinks=backlinks, pool=pool, tasks=tasks)
+           competitors=competitors, local=local, blog=blog, social=social, audit=audit, backlinks=backlinks, pool=pool, leads=leads, tasks=tasks)
 (ROOT / "data.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
 print("data.json written:", len(tasks), "tasks")

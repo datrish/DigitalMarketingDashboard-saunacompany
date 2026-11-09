@@ -4,112 +4,140 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Sauna Company Marketing</title>
+<title>Sauna & Pool Marketing</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
 :root {
-  --bg: #f6f3ee; --card: #ffffff; --ink: #1f2225; --muted: #6b6f73; --line: #e4ded4; --soft: #f1ece4;
-  --timber: #a8652f; --timber-soft: #f6e9dc;
-  --good: #2f7d4f; --good-bg: #e3f2e8; --bad: #b4412f; --bad-bg: #fbe6e1; --warn: #9a6a00; --warn-bg: #fdf1d4;
-  --blue: #2f5f8a; --blue-bg: #e2edf7;
-  --u: #b4412f; --h: #9a6a00; --m: #2f5f8a;
+  --bg: #eef1ef; --card: #ffffff; --ink: #1d2b2f; --muted: #5d6a6d; --line: #d8dedb; --soft: #f4f6f5;
+  --sauna: #a8652f; --sauna-soft: #f5e8dc; --pool: #2c6e7a; --pool-soft: #dfeef0; --both: #6b5a8e; --both-soft: #ebe7f3;
+  --timber: #a8652f; --good: #2e7a50; --good-bg: #e2f1e8; --bad: #b24a34; --bad-bg: #f9e5df; --warn: #8f6400; --warn-bg: #fbefd2;
+  --blue: #2c6e7a; --blue-bg: #dfeef0; --u: #b24a34; --h: #8f6400; --m: #2c6e7a;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #16181a; --card: #1f2225; --ink: #ece8e2; --muted: #a2a6aa; --line: #33373b; --soft: #272a2e;
-  --timber: #d08a4f; --timber-soft: #3a2a1d; --good: #6cc48f; --good-bg: #1f3428; --bad: #f08a76; --bad-bg: #3d231e;
-  --warn: #e6b84a; --warn-bg: #3a3018; --blue: #82b4e0; --blue-bg: #1d2c3b; --u: #f08a76; --h: #e6b84a; --m: #82b4e0; } }
+  --bg: #141a1b; --card: #1c2426; --ink: #e6ecea; --muted: #9eaaa8; --line: #2f3a3c; --soft: #222c2e;
+  --sauna: #d99a63; --sauna-soft: #3a2a1d; --pool: #6fb6c2; --pool-soft: #18343a; --both: #b3a2d6; --both-soft: #2b2638;
+  --timber: #d99a63; --good: #6cc48f; --good-bg: #1d3327; --bad: #f08a76; --bad-bg: #3d231e; --warn: #e6b84a; --warn-bg: #3a3018;
+  --blue: #6fb6c2; --blue-bg: #18343a; --u: #f08a76; --h: #e6b84a; --m: #6fb6c2; } }
 :root[data-theme="dark"] {
-  --bg: #16181a; --card: #1f2225; --ink: #ece8e2; --muted: #a2a6aa; --line: #33373b; --soft: #272a2e;
-  --timber: #d08a4f; --timber-soft: #3a2a1d; --good: #6cc48f; --good-bg: #1f3428; --bad: #f08a76; --bad-bg: #3d231e;
-  --warn: #e6b84a; --warn-bg: #3a3018; --blue: #82b4e0; --blue-bg: #1d2c3b; --u: #f08a76; --h: #e6b84a; --m: #82b4e0; }
+  --bg: #141a1b; --card: #1c2426; --ink: #e6ecea; --muted: #9eaaa8; --line: #2f3a3c; --soft: #222c2e;
+  --sauna: #d99a63; --sauna-soft: #3a2a1d; --pool: #6fb6c2; --pool-soft: #18343a; --both: #b3a2d6; --both-soft: #2b2638;
+  --timber: #d99a63; --good: #6cc48f; --good-bg: #1d3327; --bad: #f08a76; --bad-bg: #3d231e; --warn: #e6b84a; --warn-bg: #3a3018;
+  --blue: #6fb6c2; --blue-bg: #18343a; --u: #f08a76; --h: #e6b84a; --m: #6fb6c2; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 "IBM Plex Sans", system-ui, sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 "IBM Plex Sans", system-ui, sans-serif; }
 h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; margin: 0; letter-spacing: -0.01em; }
-a { color: var(--timber); }
-.wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px 60px; }
-header.top { padding: 22px 0 12px; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: end; justify-content: space-between; }
-header.top h1 { font-size: 26px; }
-.sub { color: var(--muted); font-size: 13px; }
-nav.jump { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin: 0 -16px 18px; padding: 8px 16px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
-nav.jump a { white-space: nowrap; text-decoration: none; color: var(--ink); font-size: 13px; padding: 5px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
-nav.jump a:hover { border-color: var(--timber); }
-section.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 16px; scroll-margin-top: 56px; }
-.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 16px; margin-bottom: 12px; }
-.card-head h2 { font-size: 19px; }
-.note { color: var(--muted); font-size: 12.5px; }
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 10px; }
-.kpi { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--card); }
-.kpi.alert { border-color: var(--bad); background: var(--bad-bg); }
-.kpi .lbl { font-size: 12.5px; color: var(--muted); }
-.kpi .big { font: 600 26px/1.15 "Bricolage Grotesque", sans-serif; margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
-.kpi .delta { font-size: 12px; display: flex; flex-wrap: wrap; gap: 2px 10px; }
-.up { color: var(--good); } .down { color: var(--bad); }
-.summary { display: grid; gap: 8px; margin-top: 14px; }
-.summary div { padding: 10px 12px; border-left: 3px solid var(--timber); background: var(--soft); border-radius: 0 8px 8px 0; font-size: 14px; }
-.tablewrap { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-th { text-align: left; font-weight: 600; font-size: 12px; color: var(--muted); padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
-td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-td.url { font-family: "IBM Plex Mono", monospace; font-size: 12px; word-break: break-all; min-width: 200px; }
-.pill { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
-.p-Urgent { background: var(--bad-bg); color: var(--u); } .p-High { background: var(--warn-bg); color: var(--h); } .p-Medium { background: var(--blue-bg); color: var(--m); }
-.s-todo { background: var(--soft); color: var(--muted); } .s-doing { background: var(--warn-bg); color: var(--warn); } .s-done { background: var(--good-bg); color: var(--good); }
-.filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.filters button { font: inherit; font-size: 13px; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
-.filters button.on { background: var(--ink); color: var(--card); border-color: var(--ink); }
-.task { border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--card); }
-.task summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+a { color: var(--pool); }
+:focus-visible { outline: 2px solid var(--pool); outline-offset: 2px; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 80px; }
+header.top { padding: 22px 0 6px; }
+header.top h1 { font-size: 24px; }
+.sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 10px 0; margin-bottom: 8px; }
+nav.tabs .seg { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
+nav.tabs a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; padding: 8px 4px; border-radius: 9px; }
+nav.tabs a[aria-current="page"] { background: var(--ink); color: var(--card); }
+nav.tabs a .n { font-weight: 500; opacity: .75; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.view[hidden] { display: none; }
+.lede { font-size: 15px; color: var(--muted); margin: 6px 0 14px; max-width: 62ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+.chips button { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
+.group { margin: 18px 0 8px; display: flex; align-items: baseline; gap: 8px; }
+.group h2 { font-size: 18px; }
+.group .cnt { color: var(--muted); font-size: 13px; }
+.task { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+.task::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--both); }
+.task[data-site="Sauna"]::before { background: var(--sauna); }
+.task[data-site="Pool"]::before { background: var(--pool); }
+.task summary { list-style: none; cursor: pointer; padding: 12px 14px 12px 20px; }
 .task summary::-webkit-details-marker { display: none; }
-.task .tid { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--muted); }
-.task .ttl { font-weight: 600; }
-.task .meta { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--muted); }
-.task .body { padding: 0 14px 14px 14px; border-top: 1px dashed var(--line); }
+.task .ttl { font-weight: 600; display: block; }
+.task .meta { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+.task .body { padding: 2px 16px 16px 20px; border-top: 1px solid var(--line); }
 .task .why { margin: 10px 0; font-size: 14px; }
 .task ol { margin: 6px 0 0; padding-left: 20px; font-size: 14px; }
-.task ol li { margin-bottom: 4px; }
-.task[open] { border-color: var(--timber); }
+.task ol li { margin-bottom: 4px; word-break: break-word; }
+.task[open] { border-color: var(--ink); }
+.site { font-weight: 600; }
+.site.Sauna { color: var(--sauna); } .site.Pool { color: var(--pool); } .site.Both, .site.Aqua { color: var(--both); }
+.pill { display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.s-todo { background: var(--soft); color: var(--muted); } .s-doing { background: var(--warn-bg); color: var(--warn); } .s-done { background: var(--good-bg); color: var(--good); } .s-block { background: var(--bad-bg); color: var(--bad); }
+.more { width: 100%; font: inherit; font-size: 14px; padding: 10px; border: 1px dashed var(--line); border-radius: 12px; background: transparent; color: var(--muted); cursor: pointer; }
+.upd { margin-top: 14px; padding: 12px; background: var(--soft); border-radius: 10px; display: grid; gap: 8px; }
+.upd .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.upd select, .upd textarea, .upd input, .rng input { font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); width: 100%; }
+.upd button.save { font: inherit; font-weight: 600; font-size: 14px; padding: 9px 18px; border-radius: 999px; border: 0; background: var(--ink); color: var(--card); cursor: pointer; justify-self: start; }
+.upd .msg { font-size: 13px; color: var(--muted); }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+.nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+.num-b { background: var(--soft); border-radius: 10px; padding: 10px 12px; }
+.num-b .lbl { font-size: 13px; color: var(--muted); }
+.num-b .big { font: 700 28px/1.1 "Bricolage Grotesque", sans-serif; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.num-b .delta { font-size: 12.5px; margin-top: 2px; }
+.up { color: var(--good); } .down { color: var(--bad); }
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+.sitecard { border-top: 5px solid var(--sauna); }
+.sitecard.pool { border-top-color: var(--pool); }
+.sitecard h2 { font-size: 20px; margin-bottom: 2px; }
+.bars { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; align-items: end; height: 120px; margin: 14px 0 4px; }
+.bars div { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; font-size: 12px; color: var(--muted); }
+.bars span.b { width: 100%; border-radius: 6px 6px 2px 2px; background: var(--sauna); min-height: 3px; }
+.pool .bars span.b { background: var(--pool); }
+.bars b { font-size: 13px; color: var(--ink); margin-bottom: 3px; font-variant-numeric: tabular-nums; }
+.take { margin: 12px 0 0; padding-left: 18px; font-size: 14px; } .take li { margin-bottom: 6px; }
+.note { color: var(--muted); font-size: 12.5px; }
+.rng { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 12px; }
+.rng .dates { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.rng input { width: auto; padding: 5px 8px; }
+.logitem { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.logitem:last-child { border-bottom: 0; }
+.logitem .when { font-size: 12.5px; color: var(--muted); }
+details.acc { background: var(--card); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; }
+details.acc > summary { cursor: pointer; padding: 14px 16px; font: 600 16px "Bricolage Grotesque", sans-serif; list-style: none; display: flex; justify-content: space-between; }
+details.acc > summary::after { content: "+"; color: var(--muted); }
+details.acc[open] > summary::after { content: "–"; }
+details.acc > summary::-webkit-details-marker { display: none; }
+details.acc > .in { padding: 0 16px 16px; }
+details.acc section.card { border: 0; padding: 0; margin: 0; background: transparent; }
+details.acc .card-head { display: none; }
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th { text-align: left; font-weight: 600; font-size: 12.5px; color: var(--muted); padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.url { font-size: 12.5px; word-break: break-all; min-width: 180px; }
 .chart { width: 100%; height: auto; display: block; }
 .legend { display: flex; gap: 14px; font-size: 12.5px; color: var(--muted); margin-top: 6px; }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
-.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 16px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; }
 .bar { display: inline-block; height: 8px; border-radius: 4px; background: var(--timber); vertical-align: middle; }
 .facts { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; font-size: 14px; margin: 0; }
 .facts dt { color: var(--muted); } .facts dd { margin: 0; }
 .bad { color: var(--bad); font-weight: 600; }
 ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margin-bottom: 5px; }
-.links { display: flex; flex-wrap: wrap; gap: 6px; }
-.links a { font-size: 12.5px; text-decoration: none; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
-.routine { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 10px; }
-.routine div { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
-.routine b { display: block; font-family: "Bricolage Grotesque", sans-serif; font-size: 15px; margin-bottom: 4px; }
+.links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.links a { font-size: 13px; text-decoration: none; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); }
+.empty { padding: 14px; text-align: center; color: var(--muted); font-size: 14px; background: var(--card); border: 1px dashed var(--line); border-radius: 12px; }
 .err { padding: 20px; color: var(--bad); }
-@media (max-width: 560px) { header.top h1 { font-size: 22px; } .kpi .big { font-size: 22px; } }
-.upd { margin-top: 12px; padding: 10px; border: 1px dashed var(--line); border-radius: 10px; display: grid; gap: 8px; }
-.upd select, .upd textarea, .upd input, .rng input { font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); width: 100%; box-sizing: border-box; }
-.upd button, .rng button { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--card); cursor: pointer; justify-self: start; }
-.upd .msg { font-size: 12.5px; color: var(--muted); }
-.rng { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px; }
-.rng input { width: auto; }
-.logitem { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-.logitem .when { font-size: 12px; color: var(--muted); }
+@media (max-width: 560px) { header.top h1 { font-size: 21px; } nav.tabs a { font-size: 13px; } .num-b .big { font-size: 24px; } }
+@media (prefers-reduced-motion: no-preference) { .task[open] .body { animation: open .18s ease-out; } @keyframes open { from { opacity: 0; transform: translateY(-4px); } } }
+.chipb { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.chipb[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <div>
-      <h1>Sauna &amp; Pool Company · Digital Marketing</h1>
-      <div class="sub" id="updated">Loading…</div>
-    </div>
-    <div class="links" id="toplinks"></div>
+    <h1>Sauna &amp; Pool Company marketing</h1>
+    <div class="sub" id="updated">Loading…</div>
   </header>
-  <nav class="jump" aria-label="Sections">
-    <a href="#overview">Overview</a><a href="#progress">Progress</a><a href="#pool">Pool site</a><a href="#routine">Daily</a><a href="#tasks">Tasks</a><a href="#search">Search</a><a href="#pages">Pages</a>
-    <a href="#keywords">Keywords</a><a href="#competitors">Competitors</a><a href="#local">Google local</a>
-    <a href="#content">Blog</a><a href="#social">Social</a><a href="#technical">Technical</a>
-  </nav>
+  <nav class="tabs" aria-label="Views"><div class="seg">
+    <a href="#todo" data-v="todo">To do<span class="n" id="n-todo"></span></a>
+    <a href="#done" data-v="done">Done</a>
+    <a href="#results" data-v="results">Results</a>
+    <a href="#details" data-v="details">Details</a>
+  </div></nav>
   <main id="app"></main>
 </div>
 <script>
@@ -118,61 +146,12 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<
 const n0 = (v) => (v == null ? '–' : Number(v).toLocaleString('en-GB'));
 const pctChange = (a, b) => (b ? Math.round(((a - b) / b) * 100) : null);
 const arrow = (d, good) => (d == null ? '' : `<span class="${(d >= 0) === (good !== 'down') ? 'up' : 'down'}">${d >= 0 ? '▲' : '▼'} ${Math.abs(d)}%</span>`);
-const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done', 'Blocked': 's-todo', 'Needs Deepti': 's-todo' };
+const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done', 'Blocked': 's-block', 'Needs Deepti': 's-block' };
 
 fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
 
-function render(d) {
-  window.__SHEET__ = d.meta.taskSheet;
-  $('#updated').textContent = `Data snapshot ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })} · ${d.meta.site}`;
-  $('#toplinks').innerHTML = Object.entries(d.meta.links).map(([k, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
-  const urgent = d.tasks.filter((t) => t.priority === 'Urgent' && t.status !== 'Done').length;
-  $('#app').innerHTML = [overview(d, urgent), progress(d), poolSec(d), routine(), tasks(d), search(d), pagesSec(d), keywords(d), comps(d), local(d), content(d), social(d), technical(d)].join('');
-  wireFilters(d);
-  wireProgress(d);
-  wireUpdates(d);
-}
 
-function overview(d, urgent) {
-  const tiles = d.kpis.map((k) => {
-    const val = k.fmt === 'int' ? n0(k.value) : k.fmt === 'pct' ? k.value.toFixed(2) + '%' : esc(k.value);
-    const deltas = [];
-    if (k.prev != null) deltas.push(`${arrow(pctChange(k.value, k.prev), k.good)} vs previous 28 days`);
-    if (k.yoy != null) deltas.push(`${arrow(pctChange(k.value, k.yoy), k.good)} vs last year`);
-    return `<div class="kpi${k.alert ? ' alert' : ''}"><div class="lbl">${esc(k.label)}</div><div class="big">${val}</div><div class="delta">${deltas.join('<br>') || `<span class="note">${esc(k.note)}</span>`}</div>${deltas.length ? `<div class="note">${esc(k.note)}</div>` : ''}</div>`;
-  }).join('');
-  return `<section class="card" id="overview"><div class="card-head"><h2>Where we stand</h2><span class="note">Search data: ${esc(d.meta.gscWindow)}</span></div>
-  <div class="kpis">${tiles}</div>
-  <div class="summary">
-    <div><b>Search:</b> impressions are up 12% on last month and 24% on last year, but clicks are flat. Pages are being shown, but titles aren't earning the click, and the main sales page (/sauna-installation) ranks 29th.</div>
-    <div><b>Google local:</b> we appear 4th in the map for "sauna installation", but with 3 reviews against 52–166 for the businesses around us. Reviews are the fastest win.</div>
-    <div><b>Content:</b> 27 blog posts, but several repeat each other and split their rankings. Big searches like "outdoor sauna" (9,900/month) and "garden sauna" (4,400) have weak pages; "basement sauna" and "commercial sauna" have none.</div>
-    <div><b>This week:</b> ${urgent} urgent tasks below. Start with the empty posts, broken addresses and noindex fix (S1–S3), the pool site's quote buttons (P1) and the Aqua Spazio form test (L4).</div>
-  </div></section>`;
-}
 
-function poolSec(d) {
-  const p = d.pool; if (!p) return '';
-  const tiles = p.kpis.map((k) => {
-    const val = k.fmt === 'int' ? n0(k.value) : esc(k.value);
-    const dl = k.prev != null ? `${arrow(pctChange(k.value, k.prev), k.good)} vs previous 28 days` : `<span class="note">${esc(k.note)}</span>`;
-    return `<div class="kpi${k.alert ? ' alert' : ''}"><div class="lbl">${esc(k.label)}</div><div class="big">${val}</div><div class="delta">${dl}</div>${k.prev != null ? `<div class="note">${esc(k.note)}</div>` : ''}</div>`;
-  }).join('');
-  const row = (cells) => `<tr>${cells.map((c, i) => `<td${i ? ' class="num"' : ''}>${typeof c === 'number' ? n0(c) : esc(c)}</td>`).join('')}</tr>`;
-  const tbl = (head, rows) => `<div class="tablewrap"><table><thead><tr>${head.map((x, i) => `<th${i ? ' class="num"' : ''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(row).join('')}</tbody></table></div>`;
-  return `<section class="card" id="pool"><div class="card-head"><h2>Swimming Pool Company</h2><span class="note">${esc(p.site)} · Search data: ${esc(p.gscWindow)}</span></div>
-  <div class="kpis">${tiles}</div>
-  <div class="summary">${p.findings.map((f) => `<div>${esc(f)}</div>`).join('')}</div>
-  <h3 style="font-size:16px;margin:16px 0 8px">Month by month: Google clicks vs new leads</h3>
-  ${tbl(['Month', 'Clicks', 'Impressions', 'New leads'], p.monthly)}
-  <h3 style="font-size:16px;margin:16px 0 8px">Top searches (last 3 months)</h3>
-  ${tbl(['Search', 'Clicks', 'Impr.', 'Pos.'], p.queries)}
-  <h3 style="font-size:16px;margin:16px 0 8px">Pages (last 3 months)</h3>
-  ${tbl(['Page', 'Clicks', 'Impr.', 'Pos.'], p.pages)}
-  <h3 style="font-size:16px;margin:16px 0 8px">Where visitors come from (GA4, 10 Oct – 8 Nov)</h3>
-  ${tbl(['Source', 'Sessions', 'Engaged %'], p.sources)}
-  <p class="note">Pool tasks P1–P8 are in the task list below (filter: Pool website).</p></section>`;
-}
 
 // ---- Live tracker (Google Apps Script web app) ----
 const PRI = { '1 - High': 'Urgent', '2 - Medium': 'High', '3 - Low': 'Medium' };
@@ -197,94 +176,9 @@ function loadLive(d) {
 const ukDate = (s) => { const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || ''); return m ? new Date(+m[3], +m[2] - 1, +m[1]) : null; };
 const isoDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
 const hm = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${m % 60 ? (m % 60) + 'm' : ''}`.trim() : `${m}m`);
-function progress(d) {
-  return `<section class="card" id="progress"><div class="card-head"><h2>Progress: what's been done</h2><span class="note">${d.live ? `Live from the task tracker · ${esc(d.liveAt)}` : 'From the last saved task list'}</span></div>
-  <div class="rng" id="rng"><span class="note">Show:</span>${[['today', 'Today'], ['yesterday', 'Yesterday'], ['week', 'Last 7 days'], ['month', 'This month'], ['all', 'All']].map(([k, l], i) => `<button data-r="${k}" class="${i === 0 ? '' : 'off'}" style="${i === 0 ? '' : 'background:var(--card);color:var(--ink)'}">${l}</button>`).join('')}
-  <input type="date" id="rfrom" aria-label="From"><input type="date" id="rto" aria-label="To"><button data-r="custom" style="background:var(--card);color:var(--ink)">Apply</button></div>
-  <div id="progout"></div></section>`;
-}
-function wireProgress(d) {
-  const out = $('#progout'); if (!out) return;
-  const show = (from, to, label) => {
-    const inR = (dt) => dt && dt >= from && dt <= to;
-    const done = new Map();
-    d.tasks.forEach((t) => { const dt = ukDate(t.done_on); if (t.status === 'Done' && inR(dt)) done.set(t.id, { id: t.id, title: t.title, when: t.done_on }); });
-    const ups = d.log.filter((l) => { const dt = isoDate(l.when); return inR(dt); }).reverse();
-    ups.filter((l) => l.to === 'Done').forEach((l) => done.set(l.id, { id: l.id, title: l.task, when: l.when }));
-    const open = d.tasks.filter((t) => t.status !== 'Done').length;
-    out.innerHTML = `<div class="kpis"><div class="kpi"><div class="lbl">Completed · ${esc(label)}</div><div class="big">${done.size}</div></div>
-      <div class="kpi"><div class="lbl">Updates · ${esc(label)}</div><div class="big">${ups.length}</div></div>
-      <div class="kpi"><div class="lbl">Time spent · ${esc(label)}</div><div class="big">${hm(ups.reduce((a, l) => a + (l.minutes || 0), 0))}</div></div>
-      <div class="kpi"><div class="lbl">Still open (all)</div><div class="big">${open}</div></div></div>
-      <h3 style="font-size:16px;margin:14px 0 6px">Completed</h3>${done.size ? [...done.values()].map((x) => `<div class="logitem"><b>${esc(x.id)}</b> ${esc(x.title)} <span class="when">· ${esc(x.when)}</span></div>`).join('') : '<p class="note">Nothing completed in this period.</p>'}
-      <h3 style="font-size:16px;margin:14px 0 6px">All updates and comments</h3>${ups.length ? ups.map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)}</div><b>${esc(l.id)}</b> ${esc(l.task)} — ${esc(l.from)} → ${esc(l.to)}${l.minutes ? ` · ${hm(l.minutes)}` : ''}${l.comment ? `<div>${esc(l.comment)}</div>` : ''}</div>`).join('') : `<p class="note">${d.live ? 'No updates in this period.' : 'Updates appear here once the tracker connection is switched on.'}</p>`}`;
-  };
-  const range = (k) => {
-    const t = new Date(); t.setHours(0, 0, 0, 0); const end = new Date(t); end.setHours(23, 59, 59);
-    if (k === 'today') return [t, end, 'today'];
-    if (k === 'yesterday') { const y = new Date(t); y.setDate(y.getDate() - 1); const ye = new Date(y); ye.setHours(23, 59, 59); return [y, ye, 'yesterday']; }
-    if (k === 'week') { const w = new Date(t); w.setDate(w.getDate() - 6); return [w, end, 'last 7 days']; }
-    if (k === 'month') return [new Date(t.getFullYear(), t.getMonth(), 1), end, 'this month'];
-    if (k === 'custom') { const f = $('#rfrom').value, to = $('#rto').value; if (!f || !to) return null; const a = isoDate(f), b = isoDate(to); b.setHours(23, 59, 59); return [a, b, `${f} to ${to}`]; }
-    return [new Date(2000, 0, 1), end, 'all time'];
-  };
-  document.querySelectorAll('#rng button').forEach((b) => b.addEventListener('click', () => {
-    const r = range(b.dataset.r); if (!r) return;
-    document.querySelectorAll('#rng button').forEach((x) => { const on = x === b; x.style.background = on ? '' : 'var(--card)'; x.style.color = on ? '' : 'var(--ink)'; });
-    show(...r);
-  }));
-  show(...range('today'));
-}
 function getKey() { try { return localStorage.getItem('trackerKey') || ''; } catch (e) { return ''; } }
 function setKey(k) { try { localStorage.setItem('trackerKey', k); } catch (e) {} }
-function updForm(d, t) {
-  if (!d.live) return `<div class="upd"><b>Update this task</b>
-    <select disabled><option>Status</option></select>
-    <textarea rows="2" disabled placeholder="What did you do? Add a link as proof."></textarea>
-    <input type="number" disabled placeholder="Time spent (minutes)">
-    <button type="button" disabled style="opacity:.5;cursor:not-allowed">Save</button>
-    <span class="msg">Not switched on yet. Deepti needs to deploy the tracker script once; then Ruchi can save updates here.</span></div>`;
-  const opts = ['Not started', 'In progress', 'Done', 'Blocked', 'Needs Deepti'].map((s) => `<option${(t.rawStatus || '') === s ? ' selected' : ''}>${s}</option>`).join('');
-  return `<form class="upd" data-id="${esc(t.id)}"><b>Update this task</b>
-    <select name="status" aria-label="Status">${opts}</select>
-    <textarea name="comment" rows="2" placeholder="What did you do? Add a link as proof."></textarea>
-    <input name="minutes" type="number" min="0" max="600" step="5" placeholder="Time spent (minutes)" inputmode="numeric">
-    <input name="key" type="password" placeholder="Passcode" value="${esc(getKey())}" autocomplete="off">
-    <button type="submit">Save</button><span class="msg"></span></form>`;
-}
-function wireUpdates(d) {
-  if (!d.live) return;
-  document.querySelectorAll('form.upd').forEach((f) => f.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
-    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value, by: 'Ruchi' };
-    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
-      if (!j.ok) { msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode.' : 'Could not save: ' + j.error; return; }
-      setKey(body.key); msg.textContent = 'Saved.';
-      fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render);
-    }).catch(() => { msg.textContent = 'Could not reach the tracker. Try again.'; });
-  }));
-}
 
-function tasks(d) {
-  const areas = [...new Set(d.tasks.map((t) => t.area))];
-  const cards = d.tasks.map((t) => `<details class="task" data-p="${esc(t.priority)}" data-a="${esc(t.area)}">
-    <summary><span class="tid">${esc(t.id)}</span><span class="ttl">${esc(t.title)}</span><span class="pill p-${esc(t.priority)}">${esc(t.priority)}</span>
-      <span class="meta"><span>${esc(t.area)}</span>${t.site ? `·<span>${esc(t.site)}</span>` : ''}·<span>Owner: ${esc(t.owner)}</span>${t.due ? `·<span>Due ${esc(t.due)}</span>` : ''}·<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}${t.minutes ? `<span>· ${hm(t.minutes)} spent</span>` : ''}</span></summary>
-    <div class="body"><p class="why"><b>Why:</b> ${esc(t.why)}</p><b>How:</b><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>${t.notes ? `<p class="why" style="white-space:pre-line"><b>Ruchi's notes:</b> ${esc(t.notes)}</p>` : ''}${updForm(d, t)}</div></details>`).join('');
-  return `<section class="card" id="tasks"><div class="card-head"><h2>Do this: prioritised task list</h2><span class="note">Tap a task for the why and the steps. Ruchi updates status in the <a href="${esc(d.meta.taskSheet)}" target="_blank" rel="noopener">task tracker</a>; this list is synced from it.</span></div>
-  <div class="filters" id="filters"><button class="on" data-f="all">All (${d.tasks.length})</button>${['Urgent', 'High', 'Medium'].map((p) => `<button data-f="p:${p}">${p} (${d.tasks.filter((t) => t.priority === p).length})</button>`).join('')}${areas.map((a) => `<button data-f="a:${esc(a)}">${esc(a)}</button>`).join('')}</div>
-  <div id="tasklist">${cards}</div></section>`;
-}
-function wireFilters() {
-  document.querySelectorAll('#filters button').forEach((b) => b.addEventListener('click', () => {
-    document.querySelectorAll('#filters button').forEach((x) => x.classList.toggle('on', x === b));
-    const f = b.dataset.f;
-    document.querySelectorAll('#tasklist .task').forEach((t) => {
-      t.hidden = !(f === 'all' || (f.startsWith('p:') && t.dataset.p === f.slice(2)) || (f.startsWith('a:') && t.dataset.a === f.slice(2)));
-    });
-  }));
-}
 
 function chart(monthly) {
   const W = 760, H = 240, pad = { l: 44, r: 44, t: 14, b: 28 };
@@ -376,23 +270,185 @@ function technical(d) {
   <p class="note"><b>Relevant:</b> ${bl.good.map(esc).join(', ')}. ${esc(bl.note)}</p></div></div></section>`;
 }
 
-function routine() {
-  const daily = [
-    ['Ask one client for a Google review', '10 min', 'Reviews drive the map listing: we have 3, the #1 company has 52.'],
-    ['Reply to every new review, message and Q&A', '5 min', 'Reply within 24 h in Google Business Profile.'],
-    ['One Google Business Profile update', '10 min', 'Mon photo · Tue post · Wed service or Q&A · Thu photo · Fri post.'],
-    ['Fix one page from the task list', '30 min', 'Better title, H2 with the exact search, 2–3 internal links, clear CTA.'],
-    ['Check the daily blog post', '15 min', 'One new keyword from the gaps table, link to a service page + case study, end with "Book a free consultation".'],
-    ['Queue one social post in Metricool', '10 min', 'Repurpose the blog or a case study; keep 7 days queued.'],
-    ['One new relevant link or listing', '10 min', 'Houzz, Checkatrade, Bark, HUUM/Harvia/Saunum dealer pages, architects, local press.'],
-    ['2-minute conversion check on a phone', '2 min', 'Call button, WhatsApp and form all work; "Book a free consultation" visible without scrolling.']];
-  return `<section class="card" id="routine"><div class="card-head"><h2>Daily routine: better rankings, more enquiries</h2><span class="note">About 90 minutes a day · tick it off on the <a href="https://docs.google.com/spreadsheets/d/1UtKLMy7w0snpfljA-fmeGugS5-_lFWNyATRybG122o8/edit" target="_blank" rel="noopener">Daily tab of the task sheet</a></span></div>
-  <div class="tablewrap"><table><thead><tr><th>#</th><th>Every day</th><th>Time</th><th>How</th></tr></thead><tbody>${daily.map((r, i) => `<tr><td>${i + 1}</td><td><b>${esc(r[0])}</b></td><td class="num">${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
-  <div class="routine" style="margin-top:12px">
-  <div><b>Monday · 30 min</b>Read this dashboard, pick the week's tasks from the top of the list, check Search Console for errors.</div>
-  <div><b>Friday · 20 min</b>Update Status on the Tasks tab, note reviews, map rank and clicks, send Deepti a 3-line update.</div>
-  </div></section>`;
+// ---------- Layout ----------
+const SITE = (t) => (t.site === 'Sauna' || t.site === 'Pool' ? t.site : 'Both');
+const SITELBL = { Sauna: 'Sauna', Pool: 'Pool', Both: 'Both sites' };
+let STATE = { site: 'all', view: 'todo' };
+function render(d) {
+  window.__D = d;
+  $('#updated').textContent = d.live ? `Tasks live from the tracker · ${d.liveAt}` : `Last saved ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`;
+  const open = d.tasks.filter((t) => t.status !== 'Done');
+  $('#n-todo').textContent = open.length;
+  $('#app').innerHTML = `<div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div>
+    <div class="view" id="v-results">${resultsView(d)}</div><div class="view" id="v-details">${detailsView(d)}</div>`;
+  wireTodo(d); wireProgress(d); wireUpdates(d); route();
 }
+function route() {
+  let v = (location.hash || '#todo').slice(1);
+  v = { progress: 'done', pool: 'results', overview: 'results', tasks: 'todo' }[v] || v;
+  if (!['todo', 'done', 'results', 'details'].includes(v)) v = 'todo';
+  document.querySelectorAll('.view').forEach((x) => (x.hidden = x.id !== 'v-' + v));
+  document.querySelectorAll('nav.tabs a').forEach((a) => (a.dataset.v === v ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
+}
+window.addEventListener('hashchange', () => { route(); window.scrollTo(0, 0); });
+
+// ---------- To do ----------
+function taskCard(d, t) {
+  const s = SITE(t);
+  const st = (t.status === 'To do' || (t.status === 'Done' && t.done_on)) ? '' : `<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>`;
+  return `<details class="task" data-site="${s}" data-id="${esc(t.id)}"><summary><span class="ttl">${esc(t.title)}</span>
+    <span class="meta"><span class="site ${s}">${SITELBL[s]}</span>${t.due ? `<span>Due ${esc(t.due)}</span>` : ''}${st}${t.minutes ? `<span>${hm(t.minutes)} spent</span>` : ''}${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
+    <div class="body"><p class="why">${esc(t.why)}</p>${t.steps.length ? `<ol>${t.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}
+    ${t.notes ? `<p class="why" style="white-space:pre-line"><b>Notes</b><br>${esc(t.notes)}</p>` : ''}${updForm(d, t)}
+    <p class="note" style="margin:10px 0 0">${esc(t.id)} · ${esc(t.area)}</p></div></details>`;
+}
+function todoView(d) {
+  return `<p class="lede">What to work on, most important first. Tap a task to see the steps and save an update.</p>
+  <div class="chips" id="sitechips" role="group" aria-label="Filter by site">${[['all', 'All'], ['Sauna', 'Sauna'], ['Pool', 'Pool'], ['Both', 'Both sites']].map(([k, l]) => `<button data-s="${k}" aria-pressed="${STATE.site === k}">${l}</button>`).join('')}</div>
+  <div id="todolist">${todoList(d)}</div>`;
+}
+function todoList(d) {
+  const open = d.tasks.filter((t) => t.status !== 'Done' && (STATE.site === 'all' || SITE(t) === STATE.site));
+  const rank = (t) => (t.status === 'In progress' ? 0 : t.status === 'Blocked' || t.status === 'Needs Deepti' ? 2 : 1);
+  const grp = (p) => open.filter((t) => t.priority === p).sort((a, b) => rank(a) - rank(b));
+  const now = grp('Urgent'), next = grp('High'), later = grp('Medium');
+  const block = (title, list, hide) => list.length ? `<div class="group"><h2>${title}</h2><span class="cnt">${list.length}</span></div>
+    ${hide ? `<button class="more" data-more="${title}">Show ${list.length} more</button><div hidden data-list="${title}">` : '<div>'}${list.map((t) => taskCard(d, t)).join('')}</div>` : '';
+  return (now.length + next.length + later.length) ? block('Do now', now) + block('Next', next) + block('Later', later, true) : '<p class="empty">Nothing open here.</p>';
+}
+function wireTodo(d) {
+  document.querySelectorAll('#sitechips button').forEach((b) => b.addEventListener('click', () => {
+    STATE.site = b.dataset.s;
+    document.querySelectorAll('#sitechips button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    $('#todolist').innerHTML = todoList(d); wireMore(); wireUpdates(d);
+  }));
+  wireMore();
+}
+function wireMore() {
+  document.querySelectorAll('.more').forEach((b) => b.addEventListener('click', () => { document.querySelector(`[data-list="${b.dataset.more}"]`).hidden = false; b.remove(); }));
+}
+function updForm(d, t) {
+  if (!d.live) return `<p class="note" style="margin-top:12px">Updating is switched off: the tracker connection isn't available.</p>`;
+  const opts = ['Not started', 'In progress', 'Done', 'Blocked', 'Needs Deepti'].map((x) => `<option${(t.rawStatus || '') === x ? ' selected' : ''}>${x}</option>`).join('');
+  return `<form class="upd" data-id="${esc(t.id)}">
+    <div class="row"><label><span class="note">Status</span><select name="status">${opts}</select></label>
+    <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label></div>
+    <label><span class="note">What did you do?</span><textarea name="comment" rows="2" placeholder="Add a link as proof"></textarea></label>
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Passcode (asked once)</span><input name="key" type="password" autocomplete="off"></label>`}
+    <button type="submit" class="save">Save update</button><span class="msg" role="status"></span></form>`;
+}
+function wireUpdates(d) {
+  if (!d.live) return;
+  document.querySelectorAll('form.upd').forEach((f) => { if (f.dataset.w) return; f.dataset.w = 1; f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
+    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value, by: 'Ruchi' };
+    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
+      if (!j.ok) { if (j.error === 'wrong passcode') setKey(''); msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Reload and enter it again.' : 'Not saved: ' + j.error; return; }
+      setKey(body.key); msg.textContent = 'Update saved.';
+      fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render);
+    }).catch(() => { msg.textContent = 'Not saved: the tracker didn’t respond. Try again.'; });
+  }); });
+}
+function getKey() { try { return localStorage.getItem('trackerKey') || ''; } catch (e) { return ''; } }
+function setKey(k) { try { localStorage.setItem('trackerKey', k); } catch (e) {} }
+
+// ---------- Done ----------
+function doneView(d) {
+  return `<p class="lede">What got finished and how long it took. Pick a period.</p>
+  <div class="rng" id="rng">${[['today', 'Today'], ['yesterday', 'Yesterday'], ['week', 'Last 7 days'], ['month', 'This month'], ['all', 'All']].map(([k, l]) => `<button class="chipb" data-r="${k}" aria-pressed="${k === 'today'}">${l}</button>`).join('')}
+  <span class="dates"><input type="date" id="rfrom" aria-label="From date"><input type="date" id="rto" aria-label="To date"><button class="chipb" data-r="custom" aria-pressed="false">Show dates</button></span></div>
+  <div id="progout"></div>`;
+}
+function wireProgress(d) {
+  const out = $('#progout'); if (!out) return;
+  const show = (from, to, label) => {
+    const inR = (dt) => dt && dt >= from && dt <= to;
+    const done = new Map();
+    d.tasks.forEach((t) => { const dt = ukDate(t.done_on); if (t.status === 'Done' && inR(dt)) done.set(t.id, t); });
+    const ups = d.log.filter((l) => inR(isoDate(l.when))).reverse();
+    ups.filter((l) => l.to === 'Done').forEach((l) => { const t = d.tasks.find((x) => x.id === l.id); if (t) done.set(l.id, t); });
+    const mins = ups.reduce((a, l) => a + (l.minutes || 0), 0);
+    out.innerHTML = `<div class="panel"><div class="nums">
+      <div class="num-b"><div class="lbl">Tasks finished</div><div class="big">${done.size}</div></div>
+      <div class="num-b"><div class="lbl">Updates</div><div class="big">${ups.length}</div></div>
+      <div class="num-b"><div class="lbl">Time logged</div><div class="big">${hm(mins)}</div></div>
+      <div class="num-b"><div class="lbl">Still open</div><div class="big">${d.tasks.filter((t) => t.status !== 'Done').length}</div></div></div></div>
+      <div class="group"><h2>Finished ${esc(label)}</h2></div>
+      ${done.size ? [...done.values()].map((t) => taskCard(d, t)).join('') : `<p class="empty">Nothing finished ${esc(label)}.</p>`}
+      <div class="group"><h2>Updates and comments</h2></div>
+      ${ups.length ? `<div class="panel">${ups.map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)}${l.minutes ? ` · ${hm(l.minutes)}` : ''}</div><b>${esc(l.task)}</b> <span class="pill ${STATUS[ST[l.to] || l.to] || 's-todo'}">${esc(l.to)}</span>${l.comment ? `<div>${esc(l.comment)}</div>` : ''}</div>`).join('')}</div>` : `<p class="empty">No updates ${esc(label)}.</p>`}`;
+    wireUpdates(d);
+  };
+  const range = (k) => {
+    const t = new Date(); t.setHours(0, 0, 0, 0); const end = new Date(t); end.setHours(23, 59, 59);
+    if (k === 'today') return [t, end, 'today'];
+    if (k === 'yesterday') { const y = new Date(t); y.setDate(y.getDate() - 1); const ye = new Date(y); ye.setHours(23, 59, 59); return [y, ye, 'yesterday']; }
+    if (k === 'week') { const w = new Date(t); w.setDate(w.getDate() - 6); return [w, end, 'in the last 7 days']; }
+    if (k === 'month') return [new Date(t.getFullYear(), t.getMonth(), 1), end, 'this month'];
+    if (k === 'custom') { const f = $('#rfrom').value, to = $('#rto').value; if (!f || !to) return null; const a = isoDate(f), b = isoDate(to); b.setHours(23, 59, 59); return [a, b, `${f} to ${to}`]; }
+    return [new Date(2000, 0, 1), end, 'so far'];
+  };
+  document.querySelectorAll('#rng button').forEach((b) => b.addEventListener('click', () => {
+    const r = range(b.dataset.r); if (!r) return;
+    document.querySelectorAll('#rng button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    show(...r);
+  }));
+  show(...range('today'));
+}
+
+// ---------- Results ----------
+function siteCard(cls, name, url, leads, months, nums, take) {
+  const max = Math.max(...leads, 1);
+  return `<div class="panel sitecard ${cls}"><h2>${name}</h2><div class="note">${url}</div>
+    <div class="bars" role="img" aria-label="New leads per month">${leads.map((v, i) => `<div><b>${v}</b><span class="b" style="height:${Math.round((v / max) * 88)}%"></span>${months[i]}</div>`).join('')}</div>
+    <div class="note" style="margin-bottom:12px">New leads per month</div>
+    <div class="nums">${nums.join('')}</div><ul class="take">${take.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+}
+function nb(lbl, v, prev, note) {
+  const ch = prev != null ? pctChange(v, prev) : null;
+  return `<div class="num-b"><div class="lbl">${esc(lbl)}</div><div class="big">${typeof v === 'number' ? n0(v) : esc(v)}</div>${ch != null ? `<div class="delta">${arrow(ch, 'up')} vs previous 28 days</div>` : note ? `<div class="delta note">${esc(note)}</div>` : ''}</div>`;
+}
+function resultsView(d) {
+  const k = Object.fromEntries(d.kpis.map((x) => [x.label, x]));
+  const pk = Object.fromEntries(d.pool.kpis.map((x) => [x.label, x]));
+  const L = d.leads;
+  return `<p class="lede">Is it working? Leads first, then Google. No paid ads ran.</p><div class="split">
+  ${siteCard('', 'The Sauna Company', 'saunacompany.co.uk', L.sauna, L.months, [
+    nb('Google clicks', k['Google clicks'].value, k['Google clicks'].prev),
+    nb('Google reviews', k['Google reviews'].value, null, 'top competitor: 4.8★ (52)')],
+    ['Leads fell to 17 in October, the lowest this year.', 'Clicks are flat: pages show in Google but titles don’t win the click.', 'Fastest wins: Google reviews, and the trade outreach calls.'])}
+  ${siteCard('pool', 'Swimming Pool Company', 'swimmingpoolcompany.co.uk', L.pool, L.months, [
+    nb('Google clicks', pk['Google clicks'].value, pk['Google clicks'].prev),
+    nb('Real UK visitors', pk['Real (UK) visitors'].value, null, 'last 30 days; US visits are bots')],
+    ['Google clicks more than doubled, but leads stayed at 2–3 a month.', 'Visitors arrive but don’t enquire: add quote buttons and phone on every page (P1).', 'No commercial pools page yet (P2).'])}
+  </div><p class="note">${esc(L.note)}</p>`;
+}
+
+// ---------- Details ----------
+function detailsView(d) {
+  const acc = (title, html, open) => `<details class="acc"${open ? ' open' : ''}><summary>${title}</summary><div class="in">${html}</div></details>`;
+  const p = d.pool;
+  const row = (cells) => `<tr>${cells.map((c, i) => `<td${i ? ' class="num"' : ''}>${typeof c === 'number' ? n0(c) : esc(c)}</td>`).join('')}</tr>`;
+  const tbl = (head, rows) => `<div class="tablewrap"><table><thead><tr>${head.map((x, i) => `<th${i ? ' class="num"' : ''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(row).join('')}</tbody></table></div>`;
+  const poolHtml = `<ul class="plain" style="margin-bottom:12px">${p.findings.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+    <h3 style="font-size:15px;margin:12px 0 6px">Google clicks vs new leads</h3>${tbl(['Month', 'Clicks', 'Impressions', 'New leads'], p.monthly)}
+    <h3 style="font-size:15px;margin:12px 0 6px">Top searches (3 months)</h3>${tbl(['Search', 'Clicks', 'Impr.', 'Pos.'], p.queries)}
+    <h3 style="font-size:15px;margin:12px 0 6px">Pages (3 months)</h3>${tbl(['Page', 'Clicks', 'Impr.', 'Pos.'], p.pages)}
+    <h3 style="font-size:15px;margin:12px 0 6px">Where visitors come from (GA4)</h3>${tbl(['Source', 'Sessions', 'Engaged %'], p.sources)}`;
+  return `<p class="lede">The full numbers behind the Results tab. Open a section when you need it.</p>
+    ${acc('Sauna: Google search, 12 months', search(d))}
+    ${acc('Sauna: pages that need work', pagesSec(d))}
+    ${acc('Sauna: keyword gaps', keywords(d))}
+    ${acc('Sauna: competitors', comps(d))}
+    ${acc('Sauna: Google Business Profile', local(d))}
+    ${acc('Sauna: blog', content(d))}
+    ${acc('Sauna: social media', social(d))}
+    ${acc('Sauna: technical and backlinks', technical(d))}
+    ${acc('Pool: search, pages and visitors', poolHtml)}
+    <div class="links">${Object.entries(d.meta.links).map(([k2, v]) => `<a href="${esc(v)}" target="_blank" rel="noopener">${esc(k2)}</a>`).join('')}</div>`;
+}
+
 </script>
 </body>
 </html>
