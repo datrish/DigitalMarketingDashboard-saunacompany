@@ -1,27 +1,306 @@
 {
  "updated": "2026-11-09 23:10",
  "blogs": [
-  {"site": "Sauna", "today": {"title": "Outdoor Sauna UK Garden Room Guide: Planning, Costs and Design", "url": "https://www.saunacompany.co.uk/post/outdoor-sauna-uk-garden-room", "date": "2026-11-09",
-     "checks": {"SEO title": true, "Category": true, "Image alt text": true, "Link to a service page": true, "Focus keyword": true}},
+  {
+   "site": "Sauna",
+   "today": {
+    "title": "Outdoor Sauna UK Garden Room Guide: Planning, Costs and Design",
+    "url": "https://www.saunacompany.co.uk/post/outdoor-sauna-uk-garden-room",
+    "date": "2026-11-09",
+    "checks": {
+     "SEO title": true,
+     "Category": true,
+     "Image alt text": true,
+     "Link to a service page": true,
+     "Focus keyword": true
+    }
+   },
    "recent": [
-     {"title": "Infrared Sauna vs Traditional Sauna: An Installer's Honest Comparison", "date": "2026-11-08", "url": "https://www.saunacompany.co.uk/post/infrared-sauna-vs-traditional", "issues": ["No category", "No focus keyword"]},
-     {"title": "Project Spotlight: A Bespoke Under-Stairs Sauna in Clapham", "date": "2026-11-07", "url": "https://www.saunacompany.co.uk/post/project-spotlight-a-bespoke-under-stairs-sauna-in-clapham", "issues": []},
-     {"title": "Sauna vs Steam Room: Which Suits Your Home?", "date": "2026-11-05", "url": "https://www.saunacompany.co.uk/post/sauna-vs-steam-room-which-suits-your-home", "issues": ["No category", "No image alt text"]}],
-   "next": [{"title": "Sauna Ventilation: The CO2 Problem Most Home Saunas Ignore", "date": "2026-11-10"}, {"title": "Winter Sauna Season: Getting the Most From a Home Sauna in a British Winter", "date": "2026-11-11"}, {"title": "Infrared Sauna Benefits: What the Evidence Actually Supports", "date": "2026-11-12"}],
-   "scheduled": 34, "warn": ["2 recent posts are missing a category"]},
-  {"site": "Pool", "today": null,
+    {
+     "title": "Infrared Sauna vs Traditional Sauna: An Installer's Honest Comparison",
+     "date": "2026-11-08",
+     "url": "https://www.saunacompany.co.uk/post/infrared-sauna-vs-traditional",
+     "issues": [
+      "No category",
+      "No focus keyword"
+     ]
+    },
+    {
+     "title": "Project Spotlight: A Bespoke Under-Stairs Sauna in Clapham",
+     "date": "2026-11-07",
+     "url": "https://www.saunacompany.co.uk/post/project-spotlight-a-bespoke-under-stairs-sauna-in-clapham",
+     "issues": []
+    },
+    {
+     "title": "Sauna vs Steam Room: Which Suits Your Home?",
+     "date": "2026-11-05",
+     "url": "https://www.saunacompany.co.uk/post/sauna-vs-steam-room-which-suits-your-home",
+     "issues": [
+      "No category",
+      "No image alt text"
+     ]
+    }
+   ],
+   "next": [
+    {
+     "title": "Sauna Ventilation: The CO2 Problem Most Home Saunas Ignore",
+     "date": "2026-11-10"
+    },
+    {
+     "title": "Winter Sauna Season: Getting the Most From a Home Sauna in a British Winter",
+     "date": "2026-11-11"
+    },
+    {
+     "title": "Infrared Sauna Benefits: What the Evidence Actually Supports",
+     "date": "2026-11-12"
+    }
+   ],
+   "scheduled": 34,
+   "warn": [
+    "2 recent posts are missing a category"
+   ]
+  },
+  {
+   "site": "Pool",
+   "today": null,
    "recent": [
-     {"title": "Concrete vs Fibreglass vs Liner Pools: An Honest UK Comparison", "date": "2026-11-08", "url": "https://www.swimmingpoolcompany.co.uk/post/concrete-vs-fibreglass-pool", "issues": ["No category"]},
-     {"title": "Do You Need Planning Permission for a Swimming Pool in England?", "date": "2026-11-06", "url": "https://www.swimmingpoolcompany.co.uk/post/planning-permission-for-swimming-pool", "issues": ["No category"]}],
-   "next": [{"title": "Swimming Pool Running Costs: Heating, Electricity and Chemicals in 2026", "date": "2026-11-10"}],
-   "scheduled": 1, "warn": ["No pool post went live today", "Only 1 pool post is scheduled", "Recent pool posts have no category"]}
+    {
+     "title": "Concrete vs Fibreglass vs Liner Pools: An Honest UK Comparison",
+     "date": "2026-11-08",
+     "url": "https://www.swimmingpoolcompany.co.uk/post/concrete-vs-fibreglass-pool",
+     "issues": [
+      "No category"
+     ]
+    },
+    {
+     "title": "Do You Need Planning Permission for a Swimming Pool in England?",
+     "date": "2026-11-06",
+     "url": "https://www.swimmingpoolcompany.co.uk/post/planning-permission-for-swimming-pool",
+     "issues": [
+      "No category"
+     ]
+    }
+   ],
+   "next": [
+    {
+     "title": "Swimming Pool Running Costs: Heating, Electricity and Chemicals in 2026",
+     "date": "2026-11-10"
+    }
+   ],
+   "scheduled": 1,
+   "warn": [
+    "No pool post went live today",
+    "Only 1 pool post is scheduled",
+    "Recent pool posts have no category"
+   ]
+  }
  ],
  "social": [
-  {"site": "Sauna", "brand": "saunacompany", "networks": "Facebook, Instagram, Pinterest, TikTok, YouTube, Google profile", "queued7": 0, "next": null, "warn": ["Nothing queued in Metricool for the next 7 days"]},
-  {"site": "Pool", "brand": "Swimming Pool Company", "networks": "Facebook, Instagram, LinkedIn, Pinterest, Google profile", "queued7": 0, "next": null, "warn": ["Nothing queued in Metricool for the next 7 days"]}
+  {
+   "site": "Sauna",
+   "brand": "saunacompany",
+   "networks": "Facebook, Instagram, Pinterest, TikTok, YouTube, Google profile",
+   "queued7": 0,
+   "next": null,
+   "warn": [
+    "Nothing queued in Metricool for the next 7 days",
+    "3 live sauna posts still contain leftover ChatGPT text"
+   ]
+  },
+  {
+   "site": "Pool",
+   "brand": "Swimming Pool Company",
+   "networks": "Facebook, Instagram, LinkedIn, Pinterest, Google profile",
+   "queued7": 0,
+   "next": null,
+   "warn": [
+    "Nothing queued in Metricool for the next 7 days"
+   ]
+  }
  ],
  "gbp": [
-  {"site": "Sauna", "name": "The Sauna Company", "rating": 3.7, "reviews": 3, "photos": 30, "lastPost": "2026-11-06", "posts7": 8, "url": "https://www.google.com/maps?cid=8965277140720320572", "warn": ["Only 3 reviews, rating 3.7 (one 1-star). Leader in the map has 52."]},
-  {"site": "Pool", "name": "The Swimming Pool Company", "rating": 4.7, "reviews": 3, "photos": 44, "lastPost": "2026-11-07", "posts7": 4, "url": "https://www.google.com/maps?cid=2879411323562518361", "warn": ["Only 3 reviews"]}
- ]
+  {
+   "site": "Sauna",
+   "name": "The Sauna Company",
+   "rating": 3.7,
+   "reviews": 3,
+   "photos": 30,
+   "lastPost": "2026-11-06",
+   "posts7": 8,
+   "url": "https://www.google.com/maps?cid=8965277140720320572",
+   "warn": [
+    "Only 3 reviews, rating 3.7 (one 1-star). Leader in the map has 52."
+   ]
+  },
+  {
+   "site": "Pool",
+   "name": "The Swimming Pool Company",
+   "rating": 4.7,
+   "reviews": 3,
+   "photos": 44,
+   "lastPost": "2026-11-07",
+   "posts7": 4,
+   "url": "https://www.google.com/maps?cid=2879411323562518361",
+   "warn": [
+    "Only 3 reviews"
+   ]
+  }
+ ],
+ "socialPosts": [
+  {
+   "site": "Sauna",
+   "network": "Instagram",
+   "date": "2026-11-02",
+   "title": "What does a home sauna actually cost?",
+   "url": "https://www.instagram.com/p/DfPGYpLCFAN/",
+   "reach": 19,
+   "interactions": 20,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Sauna",
+   "network": "Facebook",
+   "date": "2026-11-02",
+   "title": "What does a home sauna actually cost?",
+   "url": "https://facebook.com/122133437367225164/posts/122145157725225164",
+   "reach": 5,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Sauna",
+   "network": "Instagram",
+   "date": "2026-10-27",
+   "title": "Good steam is built, not bought",
+   "url": "https://www.instagram.com/p/DfAgk0CiGqd/",
+   "reach": 20,
+   "interactions": 7,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Sauna",
+   "network": "Facebook",
+   "date": "2026-10-27",
+   "title": "Good steam is built, not bought",
+   "url": "https://facebook.com/122133437367225164/posts/122144505009225164",
+   "reach": 7,
+   "interactions": 1,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Sauna",
+   "network": "Instagram",
+   "date": "2026-10-23",
+   "title": "Hot head. Cold feet. Sound familiar?",
+   "url": "https://www.instagram.com/p/De0-p3niAf2/",
+   "reach": 13,
+   "interactions": 2,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Sauna",
+   "network": "Facebook",
+   "date": "2026-10-23",
+   "title": "Hot head. Cold feet. Sound familiar?",
+   "url": "https://facebook.com/122133437367225164/posts/122144009949225164",
+   "reach": 1,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Sauna",
+   "network": "Instagram",
+   "date": "2026-10-16",
+   "title": "Is a home sauna actually worth it?",
+   "url": "https://www.instagram.com/p/DekCBQBjR5-/",
+   "reach": 24,
+   "interactions": 10,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Sauna",
+   "network": "Facebook",
+   "date": "2026-10-16",
+   "title": "Is a home sauna actually worth it?",
+   "url": "https://facebook.com/122133437367225164/posts/122143251609225164",
+   "reach": 7,
+   "interactions": 1,
+   "clicks": 0,
+   "flag": "Leftover ChatGPT text in caption"
+  },
+  {
+   "site": "Pool",
+   "network": "Facebook",
+   "date": "2026-11-07",
+   "title": "Natural stone around a pool never goes out of style",
+   "url": "https://facebook.com/1200085798847019/posts/1493772266145036",
+   "reach": 16,
+   "interactions": 2,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Pool",
+   "network": "Facebook",
+   "date": "2026-11-06",
+   "title": "Your dream pool, engineered to last generations",
+   "url": "https://facebook.com/1200085798847019/posts/1492669602921969",
+   "reach": 9,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Pool",
+   "network": "Facebook",
+   "date": "2026-11-05",
+   "title": "An indoor pool is a room that has to cope with warm water",
+   "url": "https://facebook.com/1200085798847019/posts/1491978942991035",
+   "reach": 10,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Pool",
+   "network": "Facebook",
+   "date": "2026-11-03",
+   "title": "Want to swim in your own garden next summer?",
+   "url": "https://facebook.com/1200085798847019/posts/1489999906522272",
+   "reach": 22,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Pool",
+   "network": "Facebook",
+   "date": "2026-10-27",
+   "title": "How your dream pool goes from vision to reality",
+   "url": "https://facebook.com/1200085798847019/posts/1483039563884973",
+   "reach": 20,
+   "interactions": 0,
+   "clicks": 0,
+   "flag": ""
+  },
+  {
+   "site": "Pool",
+   "network": "Instagram",
+   "date": "2026-10-27",
+   "title": "How your dream pool goes from vision to reality",
+   "url": "https://www.instagram.com/p/DfAZv17COuQ/",
+   "reach": 3,
+   "interactions": 1,
+   "clicks": 0,
+   "flag": ""
+  }
+ ],
+ "socialWindow": "last 30 days (Instagram and Facebook, from Metricool)"
 }

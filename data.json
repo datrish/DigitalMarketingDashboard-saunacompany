@@ -1238,7 +1238,8 @@
     "queued7": 0,
     "next": null,
     "warn": [
-     "Nothing queued in Metricool for the next 7 days"
+     "Nothing queued in Metricool for the next 7 days",
+     "3 live sauna posts still contain leftover ChatGPT text"
     ]
    },
    {
@@ -1279,7 +1280,164 @@
      "Only 3 reviews"
     ]
    }
-  ]
+  ],
+  "socialPosts": [
+   {
+    "site": "Sauna",
+    "network": "Instagram",
+    "date": "2026-11-02",
+    "title": "What does a home sauna actually cost?",
+    "url": "https://www.instagram.com/p/DfPGYpLCFAN/",
+    "reach": 19,
+    "interactions": 20,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Sauna",
+    "network": "Facebook",
+    "date": "2026-11-02",
+    "title": "What does a home sauna actually cost?",
+    "url": "https://facebook.com/122133437367225164/posts/122145157725225164",
+    "reach": 5,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Sauna",
+    "network": "Instagram",
+    "date": "2026-10-27",
+    "title": "Good steam is built, not bought",
+    "url": "https://www.instagram.com/p/DfAgk0CiGqd/",
+    "reach": 20,
+    "interactions": 7,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Sauna",
+    "network": "Facebook",
+    "date": "2026-10-27",
+    "title": "Good steam is built, not bought",
+    "url": "https://facebook.com/122133437367225164/posts/122144505009225164",
+    "reach": 7,
+    "interactions": 1,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Sauna",
+    "network": "Instagram",
+    "date": "2026-10-23",
+    "title": "Hot head. Cold feet. Sound familiar?",
+    "url": "https://www.instagram.com/p/De0-p3niAf2/",
+    "reach": 13,
+    "interactions": 2,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Sauna",
+    "network": "Facebook",
+    "date": "2026-10-23",
+    "title": "Hot head. Cold feet. Sound familiar?",
+    "url": "https://facebook.com/122133437367225164/posts/122144009949225164",
+    "reach": 1,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Sauna",
+    "network": "Instagram",
+    "date": "2026-10-16",
+    "title": "Is a home sauna actually worth it?",
+    "url": "https://www.instagram.com/p/DekCBQBjR5-/",
+    "reach": 24,
+    "interactions": 10,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Sauna",
+    "network": "Facebook",
+    "date": "2026-10-16",
+    "title": "Is a home sauna actually worth it?",
+    "url": "https://facebook.com/122133437367225164/posts/122143251609225164",
+    "reach": 7,
+    "interactions": 1,
+    "clicks": 0,
+    "flag": "Leftover ChatGPT text in caption"
+   },
+   {
+    "site": "Pool",
+    "network": "Facebook",
+    "date": "2026-11-07",
+    "title": "Natural stone around a pool never goes out of style",
+    "url": "https://facebook.com/1200085798847019/posts/1493772266145036",
+    "reach": 16,
+    "interactions": 2,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Pool",
+    "network": "Facebook",
+    "date": "2026-11-06",
+    "title": "Your dream pool, engineered to last generations",
+    "url": "https://facebook.com/1200085798847019/posts/1492669602921969",
+    "reach": 9,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Pool",
+    "network": "Facebook",
+    "date": "2026-11-05",
+    "title": "An indoor pool is a room that has to cope with warm water",
+    "url": "https://facebook.com/1200085798847019/posts/1491978942991035",
+    "reach": 10,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Pool",
+    "network": "Facebook",
+    "date": "2026-11-03",
+    "title": "Want to swim in your own garden next summer?",
+    "url": "https://facebook.com/1200085798847019/posts/1489999906522272",
+    "reach": 22,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Pool",
+    "network": "Facebook",
+    "date": "2026-10-27",
+    "title": "How your dream pool goes from vision to reality",
+    "url": "https://facebook.com/1200085798847019/posts/1483039563884973",
+    "reach": 20,
+    "interactions": 0,
+    "clicks": 0,
+    "flag": ""
+   },
+   {
+    "site": "Pool",
+    "network": "Instagram",
+    "date": "2026-10-27",
+    "title": "How your dream pool goes from vision to reality",
+    "url": "https://www.instagram.com/p/DfAZv17COuQ/",
+    "reach": 3,
+    "interactions": 1,
+    "clicks": 0,
+    "flag": ""
+   }
+  ],
+  "socialWindow": "last 30 days (Instagram and Facebook, from Metricool)"
  },
  "tasks": [
   {

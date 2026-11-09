@@ -34,7 +34,7 @@ header.top { padding: 22px 0 6px; }
 header.top h1 { font-size: 24px; }
 .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
 nav.tabs { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 10px 0; margin-bottom: 8px; }
-nav.tabs .seg { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
+nav.tabs .seg { display: grid; grid-template-columns: repeat(6, 1fr); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; }
 nav.tabs a { text-align: center; text-decoration: none; color: var(--muted); font-weight: 600; font-size: 14px; padding: 8px 4px; border-radius: 9px; }
 nav.tabs a[aria-current="page"] { background: var(--ink); color: var(--card); }
 nav.tabs a .n { font-weight: 500; opacity: .75; margin-left: 4px; font-variant-numeric: tabular-nums; }
@@ -120,7 +120,7 @@ ul.plain { margin: 0; padding-left: 18px; font-size: 14px; } ul.plain li { margi
 .links a { font-size: 13px; text-decoration: none; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--ink); }
 .empty { padding: 14px; text-align: center; color: var(--muted); font-size: 14px; background: var(--card); border: 1px dashed var(--line); border-radius: 12px; }
 .err { padding: 20px; color: var(--bad); }
-@media (max-width: 560px) { header.top h1 { font-size: 21px; } nav.tabs a { font-size: 13px; } .num-b .big { font-size: 24px; } }
+@media (max-width: 560px) { header.top h1 { font-size: 21px; } nav.tabs a { font-size: 12px; padding: 8px 2px; } nav.tabs a .n { margin-left: 2px; } .num-b .big { font-size: 24px; } }
 @media (prefers-reduced-motion: no-preference) { .task[open] .body { animation: open .18s ease-out; } @keyframes open { from { opacity: 0; transform: translateY(-4px); } } }
 .chipb { font: inherit; font-size: 13.5px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
 .chipb[aria-pressed="true"] { background: var(--ink); color: var(--card); border-color: var(--ink); }
@@ -157,6 +157,7 @@ nav.tabs a[aria-current="page"] #n-warn { color: inherit; }
     <a href="#today" data-v="today">Today<span class="n" id="n-warn" aria-label="warnings"></span></a>
     <a href="#todo" data-v="todo">To do<span class="n" id="n-todo"></span></a>
     <a href="#done" data-v="done">Done</a>
+    <a href="#social" data-v="social">Social</a>
     <a href="#results" data-v="results">Results</a>
     <a href="#details" data-v="details">Details</a>
   </div></nav>
@@ -180,18 +181,19 @@ const PRI = { '1 - High': 'Urgent', '2 - Medium': 'High', '3 - Low': 'Medium' };
 const ST = { 'Not started': 'To do' };
 const steps = (s) => String(s || '').replace(/ ; /g, ';').split(';').map((x) => x.trim()).filter(Boolean);
 function loadLive(d) {
-  d.log = [];
+  d.log = []; d.socialLog = [];
   const api = d.meta.trackerApi;
   if (!api) return d;
   return fetch(api, { cache: 'no-store' }).then((r) => r.json()).then((j) => {
     if (!j.ok) return d;
     d.live = true;
     d.tasks = j.tasks.map((r) => ({
-      id: r['ID'], priority: PRI[r['Priority']] || 'Medium', area: r['Area'], site: r['Site'], owner: 'Ruchi',
+      id: r['ID'], priority: PRI[r['Priority']] || 'Medium', area: r['Area'], site: r['Site'], owner: r['Owner'] || 'Ruchi',
       status: ST[r['Status']] || r['Status'] || 'To do', rawStatus: r['Status'], due: r['Target date'], done_on: r['Date done'],
       title: r['Task'], why: r['Why (source)'], steps: steps(r['Pages / detail']), notes: r["Ruchi's notes / proof link"], minutes: Number(r['Time spent (min)']) || 0 }));
     d.log = j.log || [];
-    if (j.pulse) d.pulse = j.pulse;
+    if (j.pulse) d.pulse = Object.assign({}, d.pulse || {}, j.pulse);
+    d.socialLog = j.social || [];
     d.liveAt = j.at;
     return d;
   }).catch(() => d);
@@ -296,7 +298,7 @@ function technical(d) {
 // ---------- Layout ----------
 const SITE = (t) => (t.site === 'Sauna' || t.site === 'Pool' ? t.site : 'Both');
 const SITELBL = { Sauna: 'Sauna', Pool: 'Pool', Both: 'Both sites' };
-let STATE = { site: 'all', view: 'todo' };
+let STATE = { site: 'all', who: 'all', view: 'todo' };
 function render(d) {
   window.__D = d;
   $('#updated').textContent = d.live ? `Tasks live from the tracker · ${d.liveAt}` : `Last saved ${new Date(d.meta.updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}`;
@@ -304,14 +306,14 @@ function render(d) {
   $('#n-todo').textContent = open.length;
   const warns = pulseWarnings(d);
   $('#n-warn').textContent = warns.length ? warns.length : '';
-  $('#app').innerHTML = `<div class="view" id="v-today">${todayView(d, warns)}</div><div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div>
+  $('#app').innerHTML = `<div class="view" id="v-today">${todayView(d, warns)}</div><div class="view" id="v-todo">${todoView(d)}</div><div class="view" id="v-done">${doneView(d)}</div><div class="view" id="v-social">${socialView(d)}</div>
     <div class="view" id="v-results">${resultsView(d)}</div><div class="view" id="v-details">${detailsView(d)}</div>`;
-  wireTodo(d); wireProgress(d); wireUpdates(d); route();
+  wireTodo(d); wireProgress(d); wireUpdates(d); wireSocial(d); route();
 }
 function route() {
   let v = (location.hash || '#today').slice(1);
   v = { progress: 'done', pool: 'results', overview: 'results', tasks: 'todo' }[v] || v;
-  if (!['today', 'todo', 'done', 'results', 'details'].includes(v)) v = 'today';
+  if (!['today', 'todo', 'done', 'social', 'results', 'details'].includes(v)) v = 'today';
   document.querySelectorAll('.view').forEach((x) => (x.hidden = x.id !== 'v-' + v));
   document.querySelectorAll('nav.tabs a').forEach((a) => (a.dataset.v === v ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current')));
 }
@@ -359,7 +361,7 @@ function taskCard(d, t) {
   const s = SITE(t);
   const st = (t.status === 'To do' || (t.status === 'Done' && t.done_on)) ? '' : `<span class="pill ${STATUS[t.status] || 's-todo'}">${esc(t.status)}</span>`;
   return `<details class="task" data-site="${s}" data-id="${esc(t.id)}"><summary><span class="ttl">${esc(t.title)}</span>
-    <span class="meta"><span class="site ${s}">${SITELBL[s]}</span>${t.due ? `<span>Due ${esc(t.due)}</span>` : ''}${st}${t.minutes ? `<span>${hm(t.minutes)} spent</span>` : ''}${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
+    <span class="meta"><span class="site ${s}">${SITELBL[s]}</span><span>${esc(t.owner)}</span>${t.due ? `<span>Due ${esc(t.due)}</span>` : ''}${st}${t.minutes ? `<span>${hm(t.minutes)} spent</span>` : ''}${t.done_on ? `<span>Done ${esc(t.done_on)}</span>` : ''}</span></summary>
     <div class="body"><p class="why">${esc(t.why)}</p>${t.steps.length ? `<ol>${t.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}
     ${t.notes ? `<p class="why" style="white-space:pre-line"><b>Notes</b><br>${esc(t.notes)}</p>` : ''}${updForm(d, t)}
     <p class="note" style="margin:10px 0 0">${esc(t.id)} · ${esc(t.area)}</p></div></details>`;
@@ -367,10 +369,11 @@ function taskCard(d, t) {
 function todoView(d) {
   return `<p class="lede">What to work on, most important first. Tap a task to see the steps and save an update.</p>
   <div class="chips" id="sitechips" role="group" aria-label="Filter by site">${[['all', 'All'], ['Sauna', 'Sauna'], ['Pool', 'Pool'], ['Both', 'Both sites']].map(([k, l]) => `<button data-s="${k}" aria-pressed="${STATE.site === k}">${l}</button>`).join('')}</div>
+  <div class="chips" id="whochips" role="group" aria-label="Filter by person">${[['all', 'Everyone'], ['Ruchi', 'Ruchi'], ['Ajay', 'Ajay']].map(([k, l]) => `<button data-w="${k}" aria-pressed="${STATE.who === k}">${l}</button>`).join('')}</div>
   <div id="todolist">${todoList(d)}</div>`;
 }
 function todoList(d) {
-  const open = d.tasks.filter((t) => t.status !== 'Done' && (STATE.site === 'all' || SITE(t) === STATE.site));
+  const open = d.tasks.filter((t) => t.status !== 'Done' && (STATE.site === 'all' || SITE(t) === STATE.site) && (STATE.who === 'all' || t.owner === STATE.who));
   const rank = (t) => (t.status === 'In progress' ? 0 : t.status === 'Blocked' || t.status === 'Needs Deepti' ? 2 : 1);
   const grp = (p) => open.filter((t) => t.priority === p).sort((a, b) => rank(a) - rank(b));
   const now = grp('Urgent'), next = grp('High'), later = grp('Medium');
@@ -382,6 +385,11 @@ function wireTodo(d) {
   document.querySelectorAll('#sitechips button').forEach((b) => b.addEventListener('click', () => {
     STATE.site = b.dataset.s;
     document.querySelectorAll('#sitechips button').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    $('#todolist').innerHTML = todoList(d); wireMore(); wireUpdates(d);
+  }));
+  document.querySelectorAll('#whochips button').forEach((b) => b.addEventListener('click', () => {
+    STATE.who = b.dataset.w;
+    document.querySelectorAll('#whochips button').forEach((x) => x.setAttribute('aria-pressed', x === b));
     $('#todolist').innerHTML = todoList(d); wireMore(); wireUpdates(d);
   }));
   wireMore();
@@ -396,15 +404,15 @@ function updForm(d, t) {
     <div class="row"><label><span class="note">Status</span><select name="status">${opts}</select></label>
     <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label></div>
     <label><span class="note">What did you do?</span><textarea name="comment" rows="2" placeholder="Add a link as proof"></textarea></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Passcode (asked once)</span><input name="key" type="password" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="password" autocomplete="off"></label>`}
     <button type="submit" class="save">Save update</button><span class="msg" role="status"></span></form>`;
 }
 function wireUpdates(d) {
   if (!d.live) return;
-  document.querySelectorAll('form.upd').forEach((f) => { if (f.dataset.w) return; f.dataset.w = 1; f.addEventListener('submit', (e) => {
+  document.querySelectorAll('form.upd[data-id]').forEach((f) => { if (f.dataset.w) return; f.dataset.w = 1; f.addEventListener('submit', (e) => {
     e.preventDefault();
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
-    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value, by: 'Ruchi' };
+    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value };
     fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
       if (!j.ok) { if (j.error === 'wrong passcode') setKey(''); msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Reload and enter it again.' : 'Not saved: ' + j.error; return; }
       setKey(body.key); msg.textContent = 'Update saved.';
@@ -457,6 +465,63 @@ function wireProgress(d) {
     show(...r);
   }));
   show(...range('today'));
+}
+
+// ---------- Social (Ajay) ----------
+function socialView(d) {
+  const P = d.pulse || {}, posts = (P.socialPosts || []).slice().sort((a, b) => (a.date < b.date ? 1 : -1));
+  const S = d.socialLog || [];
+  const sum = (arr, k) => arr.reduce((a, x) => a + (Number(x[k]) || 0), 0);
+  const since = (days) => { const t = new Date(); t.setHours(0, 0, 0, 0); t.setDate(t.getDate() - days + 1); return t; };
+  const in7 = (s) => { const x = isoDate(s); return x && x >= since(7); };
+  const live7 = posts.filter((p) => in7(p.date));
+  const log7 = S.filter((l) => in7(l.date));
+  const mins7 = sum(log7, 'minutes'), comments7 = sum(log7, 'comments'), leads7 = sum(log7, 'leads');
+  const made7 = log7.filter((l) => l.type === 'Post made').length;
+  const reach30 = sum(posts, 'reach'), int30 = sum(posts, 'interactions');
+  const flagged = posts.filter((p) => p.flag);
+  const queued = (P.social || []).reduce((a, s) => a + (s.queued7 || 0), 0);
+  const form = d.live ? `<form class="upd" id="soclog"><b>Log your work</b>
+    <div class="row"><label><span class="note">What did you do?</span><select name="type">${['Post made', 'Post went live', 'Outreach (comments)', 'Replies to comments/messages', 'Lead passed to Kiana', 'Other'].map((x) => `<option>${x}</option>`).join('')}</select></label>
+    <label><span class="note">Business</span><select name="site"><option>Sauna</option><option>Pool</option><option>Both</option></select></label></div>
+    <div class="row"><label><span class="note">Network</span><select name="network">${['Instagram', 'Facebook', 'LinkedIn', 'Pinterest', 'TikTok', 'YouTube', 'Google profile', 'Several'].map((x) => `<option>${x}</option>`).join('')}</select></label>
+    <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label></div>
+    <div class="row"><label><span class="note">Comments made</span><input name="comments" type="number" min="0" max="500" inputmode="numeric" placeholder="0"></label>
+    <label><span class="note">Leads passed to Kiana</span><input name="leads" type="number" min="0" max="50" inputmode="numeric" placeholder="0"></label></div>
+    <label><span class="note">From which blog post? (link)</span><input name="blog" type="url" placeholder="https://www.saunacompany.co.uk/post/…"></label>
+    <label><span class="note">Link to the post or the account you engaged with</span><input name="link" type="url"></label>
+    <label><span class="note">Notes</span><textarea name="notes" rows="2"></textarea></label>
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="password" autocomplete="off"></label>`}
+    <button type="submit" class="save">Save to log</button><span class="msg" role="status"></span></form>` : '';
+  return `<p class="lede">Ajay's social media work: posts made from the blogs, what went live, the results, outreach and leads.</p>
+  <div class="panel"><div class="nums">
+    <div class="num-b"><div class="lbl">Posts live, last 7 days</div><div class="big">${live7.length}</div><div class="delta note">Instagram + Facebook</div></div>
+    <div class="num-b${queued < 3 ? ' warnb' : ''}"><div class="lbl">Queued, next 7 days</div><div class="big">${queued}</div></div>
+    <div class="num-b"><div class="lbl">Comments made, 7 days</div><div class="big">${comments7}</div></div>
+    <div class="num-b"><div class="lbl">Leads passed, 7 days</div><div class="big">${leads7}</div></div>
+    <div class="num-b"><div class="lbl">Time logged, 7 days</div><div class="big">${hm(mins7)}</div><div class="delta note">${made7} posts made</div></div>
+    <div class="num-b"><div class="lbl">Reach per post, 30 days</div><div class="big">${posts.length ? Math.round(reach30 / posts.length) : 0}</div><div class="delta note">${posts.length ? (int30 / posts.length).toFixed(1) : 0} interactions per post</div></div>
+  </div></div>
+  ${flagged.length ? `<div class="panel attn"><h2>Fix now</h2><ul><li>${flagged.length} live posts still show leftover ChatGPT text, e.g. "Want the bg image prompts for this one?". Edit the captions (task A2).</li></ul></div>` : ''}
+  ${form}
+  <div class="group"><h2>Posts that went live</h2><span class="cnt">${esc(P.socialWindow || '')}</span></div>
+  ${posts.length ? `<div class="panel tablewrap"><table><thead><tr><th>Date</th><th>Post</th><th class="num">Reach</th><th class="num">Inter&shy;actions</th></tr></thead><tbody>${posts.map((p) => `<tr><td><span class="site ${p.site}">${p.site}</span><br><span class="note">${fmtD(p.date)} · ${esc(p.network)}</span></td><td><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>${p.flag ? `<br><span class="bad">${esc(p.flag)}</span>` : ''}</td><td class="num">${n0(p.reach)}</td><td class="num">${n0(p.interactions)}</td></tr>`).join('')}</tbody></table></div>` : '<p class="empty">No posts found in this period.</p>'}
+  <div class="group"><h2>Ajay's log</h2><span class="cnt">${S.length}</span></div>
+  ${S.length ? `<div class="panel">${S.slice().reverse().slice(0, 40).map((l) => `<div class="logitem"><div class="when">${esc(l.when)} · ${esc(l.by)} · <span class="site ${esc(l.site)}">${esc(l.site)}</span> · ${esc(l.network)}${l.minutes ? ` · ${hm(l.minutes)}` : ''}</div><b>${esc(l.type)}</b>${l.comments ? ` · ${l.comments} comments` : ''}${l.leads ? ` · <b>${l.leads} lead${l.leads > 1 ? 's' : ''}</b>` : ''}${l.link ? ` · <a href="${esc(l.link)}" target="_blank" rel="noopener">link</a>` : ''}${l.blog ? ` · <a href="${esc(l.blog)}" target="_blank" rel="noopener">blog</a>` : ''}${l.notes ? `<div>${esc(l.notes)}</div>` : ''}</div>`).join('')}</div>` : '<p class="empty">Nothing logged yet. Ajay logs each post he makes, each outreach session and each lead.</p>'}`;
+}
+function wireSocial(d) {
+  const f = $('#soclog'); if (!f || !d.live) return;
+  f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
+    const v = (n) => f[n].value;
+    const body = { kind: 'social', type: v('type'), site: v('site'), network: v('network'), minutes: v('minutes'), comments: v('comments'), leads: v('leads'), blog: v('blog'), link: v('link'), notes: v('notes'), key: v('key') };
+    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
+      if (!j.ok) { if (j.error === 'wrong passcode') setKey(''); msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Reload and enter it again.' : 'Not saved: ' + j.error; return; }
+      setKey(body.key); msg.textContent = 'Saved to the log.';
+      fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then((dd) => { render(dd); location.hash = '#social'; });
+    }).catch(() => { msg.textContent = 'Not saved: the tracker didn’t respond. Try again.'; });
+  });
 }
 
 // ---------- Results ----------
