@@ -692,5 +692,24 @@
    "Delete 'copy of' page, 301 to the real one"
   ],
   "notes": "Ruchi: done."
+ },
+ {
+  "id": "P8",
+  "priority": "High",
+  "area": "Pool website",
+  "site": "Pool",
+  "owner": "Ruchi",
+  "status": "To do",
+  "due": "By 13 Nov",
+  "done_on": "",
+  "title": "Set up a UK-only view in Google Analytics (hide bot traffic)",
+  "why": "US (174 visitors, 7% engaged), Singapore and China visits are bots – only 2 US clicks came from Google in 28 days (GA4 + Search Console, 10 Oct–8 Nov)",
+  "steps": [
+   "GA4 (Swimming Pool Company) → Reports → Add comparison → Country = United Kingdom",
+   "save it",
+   "report pool visits as UK + Google organic only",
+   "do the same on the Sauna Company property"
+  ],
+  "notes": ""
  }
 ]
