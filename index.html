@@ -507,7 +507,7 @@ function updForm(d, t) {
     <div class="row"><label><span class="note">Status</span><select name="status">${opts}</select></label>
     <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label></div>
     <label><span class="note">What did you do?</span><textarea name="comment" rows="2" placeholder="Add a link as proof"></textarea></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="password" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
     <button type="submit" class="save">Save update</button><span class="msg" role="status"></span></form>`;
 }
 function wireUpdates(d) {
@@ -515,9 +515,9 @@ function wireUpdates(d) {
   document.querySelectorAll('form.upd[data-id]').forEach((f) => { if (f.dataset.w) return; f.dataset.w = 1; f.addEventListener('submit', (e) => {
     e.preventDefault();
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
-    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: f.key.value };
+    const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: String(f.key.value || '').replace(/\s+/g, '').toLowerCase() };
     fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
-      if (!j.ok) { if (j.error === 'wrong passcode') setKey(''); msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Reload and enter it again.' : 'Not saved: ' + j.error; return; }
+      if (!j.ok) { if (j.error === 'wrong passcode') { setKey(''); const hk = f.querySelector('input[type=hidden][name=key]'); if (hk) hk.outerHTML = '<label><span class="note">Your passcode</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'; } msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Type it again (small letters, no spaces).' : 'Not saved: ' + j.error; return; }
       setKey(body.key); msg.textContent = 'Update saved.';
       fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render);
     }).catch(() => { msg.textContent = 'Not saved: the tracker didn’t respond. Try again.'; });
@@ -594,7 +594,7 @@ function socialView(d) {
     <label><span class="note">From which blog post? (link)</span><input name="blog" type="url" placeholder="https://www.saunacompany.co.uk/post/…"></label>
     <label><span class="note">Link to the post or the account you engaged with</span><input name="link" type="url"></label>
     <label><span class="note">Notes</span><textarea name="notes" rows="2"></textarea></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="password" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
     <button type="submit" class="save">Save to log</button><span class="msg" role="status"></span></form>` : '';
   return `<p class="lede">Ajay's social media work: posts made from the blogs, what went live, the results, outreach and leads.</p>
   <div class="panel"><div class="nums">
@@ -618,9 +618,9 @@ function wireSocial(d) {
     e.preventDefault();
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
     const v = (n) => f[n].value;
-    const body = { kind: 'social', type: v('type'), site: v('site'), network: v('network'), minutes: v('minutes'), comments: v('comments'), leads: v('leads'), blog: v('blog'), link: v('link'), notes: v('notes'), key: v('key') };
+    const body = { kind: 'social', type: v('type'), site: v('site'), network: v('network'), minutes: v('minutes'), comments: v('comments'), leads: v('leads'), blog: v('blog'), link: v('link'), notes: v('notes'), key: String(v('key') || '').replace(/\s+/g, '').toLowerCase() };
     fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
-      if (!j.ok) { if (j.error === 'wrong passcode') setKey(''); msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Reload and enter it again.' : 'Not saved: ' + j.error; return; }
+      if (!j.ok) { if (j.error === 'wrong passcode') { setKey(''); const hk = f.querySelector('input[type=hidden][name=key]'); if (hk) hk.outerHTML = '<label><span class="note">Your passcode</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'; } msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Type it again (small letters, no spaces).' : 'Not saved: ' + j.error; return; }
       setKey(body.key); msg.textContent = 'Saved to the log.';
       fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then((dd) => { render(dd); location.hash = '#social'; });
     }).catch(() => { msg.textContent = 'Not saved: the tracker didn’t respond. Try again.'; });
