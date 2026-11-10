@@ -160,6 +160,8 @@ nav.tabs a[aria-current="page"] #n-warn { color: inherit; }
 .rt-st { font-size: 13px; color: var(--muted); } .rt-bad .rt-st { color: var(--bad); font-weight: 600; } .rt-ok .rt-st { color: var(--good); } .rt-due .rt-st { color: var(--warn); font-weight: 600; }
 .rt-row details { grid-column: 2; } .rt-row summary { cursor: pointer; font-size: 13px; color: var(--pool); }
 .rt-row .upd { margin-top: 8px; }
+.linkbtn { border: 0; background: none; padding: 0; color: inherit; text-decoration: underline; font: inherit; cursor: pointer; }
+#who b { font-weight: 700; }
 </style>
 </head>
 <body>
@@ -167,6 +169,7 @@ nav.tabs a[aria-current="page"] #n-warn { color: inherit; }
   <header class="top">
     <h1>Sauna &amp; Pool Company marketing</h1>
     <div class="sub" id="updated">Loading…</div>
+    <div class="sub" id="who" hidden></div>
   </header>
   <nav class="tabs" aria-label="Views"><div class="seg">
     <a href="#today" data-v="today">Today<span class="n" id="n-warn" aria-label="warnings"></span></a>
@@ -186,6 +189,25 @@ const pctChange = (a, b) => (b ? Math.round(((a - b) / b) * 100) : null);
 const arrow = (d, good) => (d == null ? '' : `<span class="${(d >= 0) === (good !== 'down') ? 'up' : 'down'}">${d >= 0 ? '▲' : '▼'} ${Math.abs(d)}%</span>`);
 const STATUS = { 'To do': 's-todo', 'In progress': 's-doing', 'Done': 's-done', 'Blocked': 's-block', 'Needs Deepti': 's-block' };
 
+// One-tap setup link: ?setup=<passcode>&name=<Name> saves the passcode on this phone, then removes it from the address bar
+(function () {
+  try {
+    const q = new URLSearchParams(location.search);
+    if (q.has('setup')) {
+      const k = String(q.get('setup') || '').normalize('NFKC').toLowerCase().replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, '-').replace(/[^a-z0-9-]/g, '');
+      if (k) { localStorage.setItem('trackerKey', k); localStorage.setItem('trackerName', (q.get('name') || '').replace(/[^A-Za-z ]/g, '').slice(0, 30)); localStorage.setItem('trackerJustSet', '1'); }
+      history.replaceState(null, '', location.pathname + (location.hash || '#todo'));
+    }
+  } catch (e) {}
+  const who = document.getElementById('who');
+  let k = '', n = '', just = false;
+  try { k = localStorage.getItem('trackerKey') || ''; n = localStorage.getItem('trackerName') || ''; just = localStorage.getItem('trackerJustSet') === '1'; localStorage.removeItem('trackerJustSet'); } catch (e) {}
+  if (k) {
+    who.hidden = false;
+    who.innerHTML = `${just ? '<b>Done.</b> ' : ''}This phone can save updates${n ? ' as <b>' + n.replace(/[<>&"]/g, '') + '</b>' : ''}. <button type="button" id="signout" class="linkbtn">Remove</button>`;
+    document.getElementById('signout').addEventListener('click', () => { try { localStorage.removeItem('trackerKey'); localStorage.removeItem('trackerName'); } catch (e) {} location.reload(); });
+  }
+})();
 fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render).catch((e) => { $('#app').innerHTML = `<div class="err">Could not load data.json (${esc(e.message)}).</div>`; });
 
 
@@ -444,7 +466,7 @@ function routineForm(id) {
   return `<form class="upd" data-id="${esc(id)}"><input type="hidden" name="status" value="In progress">
     <label><span class="note">What did you do? Paste the link as proof.</span><textarea name="comment" rows="2" required placeholder="Page or site, and the link"></textarea></label>
     <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="password" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (or open your personal setup link once)</span><input name="key" type="password" autocomplete="off"></label>`}
     <button type="submit" class="save">Save</button><span class="msg" role="status"></span></form>`;
 }
 function routineBlock(d) {
@@ -508,7 +530,7 @@ function updForm(d, t) {
     <div class="row"><label><span class="note">Status</span><select name="status">${opts}</select></label>
     <label><span class="note">Time spent (min)</span><input name="minutes" type="number" min="0" max="600" step="5" inputmode="numeric" placeholder="0"></label></div>
     <label><span class="note">What did you do?</span><textarea name="comment" rows="2" placeholder="Add a link as proof"></textarea></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (or open your personal setup link once)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
     <button type="submit" class="save">Save update</button><span class="msg" role="status"></span></form>`;
 }
 function wireUpdates(d) {
@@ -595,7 +617,7 @@ function socialView(d) {
     <label><span class="note">From which blog post? (link)</span><input name="blog" type="url" placeholder="https://www.saunacompany.co.uk/post/…"></label>
     <label><span class="note">Link to the post or the account you engaged with</span><input name="link" type="url"></label>
     <label><span class="note">Notes</span><textarea name="notes" rows="2"></textarea></label>
-    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (asked once on this device)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
+    ${getKey() ? `<input name="key" type="hidden" value="${esc(getKey())}">` : `<label><span class="note">Your passcode (or open your personal setup link once)</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>`}
     <button type="submit" class="save">Save to log</button><span class="msg" role="status"></span></form>` : '';
   return `<p class="lede">Ajay's social media work: posts made from the blogs, what went live, the results, outreach and leads.</p>
   <div class="panel"><div class="nums">
