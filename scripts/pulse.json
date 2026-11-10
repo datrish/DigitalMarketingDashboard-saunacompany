@@ -653,7 +653,10 @@
   {
    "site": "Sauna",
    "auditDate": "2026-11-09",
-   "auditPages": 128
+   "auditPages": 128,
+   "aiDate": "2026-11-10",
+   "aiMentioned": 3,
+   "aiPrompts": 7
   },
   {
    "site": "Pool",
