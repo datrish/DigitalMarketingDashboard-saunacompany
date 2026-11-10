@@ -1265,7 +1265,9 @@
     "url": "https://www.google.com/maps?cid=8965277140720320572",
     "warn": [
      "Only 3 reviews, rating 3.7 (one 1-star). Leader in the map has 52."
-    ]
+    ],
+    "unanswered": 0,
+    "repliesChecked": "2026-11-10"
    },
    {
     "site": "Pool",
@@ -1278,7 +1280,9 @@
     "url": "https://www.google.com/maps?cid=2879411323562518361",
     "warn": [
      "Only 3 reviews"
-    ]
+    ],
+    "unanswered": 0,
+    "repliesChecked": "2026-11-10"
    }
   ],
   "socialPosts": [
@@ -1779,7 +1783,19 @@
     }
    ],
    "mentorNote": "Claude’s view, based on the numbers above. Judgement, not data."
-  }
+  },
+  "monthly": [
+   {
+    "site": "Sauna",
+    "auditDate": "2026-11-09",
+    "auditPages": 128
+   },
+   {
+    "site": "Pool",
+    "auditDate": "2026-11-09",
+    "auditPages": 78
+   }
+  ]
  },
  "tasks": [
   {
