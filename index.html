@@ -239,6 +239,12 @@ const ukDate = (s) => { const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s || '')
 const isoDate = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s || ''); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
 const hm = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${m % 60 ? (m % 60) + 'm' : ''}`.trim() : `${m}m`);
 function cleanKey(k) { return String(k || '').normalize('NFKC').toLowerCase().replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, '-').replace(/[^a-z0-9-]/g, ''); }
+// Send an update to the tracker. If the browser blocks reading the reply (ad blockers, privacy settings),
+// send it anyway without reading the reply, then reload the data so the change shows.
+function postTracker(api, body) {
+  return fetch(api, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).catch(() =>
+    fetch(api, { method: 'POST', mode: 'no-cors', body: JSON.stringify(body) }).then(() => ({ ok: true, blind: true })));
+}
 function getKey() { try { return localStorage.getItem('trackerKey') || ''; } catch (e) { return ''; } }
 function setKey(k) { try { localStorage.setItem('trackerKey', k); } catch (e) {} }
 
@@ -524,7 +530,7 @@ function wireMore() {
   document.querySelectorAll('.more').forEach((b) => b.addEventListener('click', () => { document.querySelector(`[data-list="${b.dataset.more}"]`).hidden = false; b.remove(); }));
 }
 function updForm(d, t) {
-  if (!d.live) return `<p class="note" style="margin-top:12px">Updating is switched off: the tracker connection isn't available.</p>`;
+  if (!d.live) return `<p class="note" style="margin-top:12px">Updating is switched off: this browser could not reach the tracker. Turn off any ad blocker or privacy shield for this site, then reload.</p>`;
   const opts = ['Not started', 'In progress', 'Done', 'Blocked', 'Needs Deepti'].map((x) => `<option${(t.rawStatus || '') === x ? ' selected' : ''}>${x}</option>`).join('');
   return `<form class="upd" data-id="${esc(t.id)}">
     <div class="row"><label><span class="note">Status</span><select name="status">${opts}</select></label>
@@ -539,9 +545,9 @@ function wireUpdates(d) {
     e.preventDefault();
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
     const body = { id: f.dataset.id, status: f.status.value, comment: f.comment.value, minutes: f.minutes.value, key: cleanKey(f.key.value) };
-    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
+    postTracker(d.meta.trackerApi, body).then((j) => {
       if (!j.ok) { if (j.error === 'wrong passcode') { setKey(''); const hk = f.querySelector('input[type=hidden][name=key]'); if (hk) hk.outerHTML = '<label><span class="note">Your passcode</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'; } msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Type it again (small letters, no spaces).' : 'Not saved: ' + j.error; return; }
-      setKey(body.key); msg.textContent = 'Update saved.';
+      setKey(body.key); msg.textContent = j.blind ? 'Sent. Checking it arrived…' : 'Update saved.';
       fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then(render);
     }).catch(() => { msg.textContent = 'Not saved: the tracker didn’t respond. Try again.'; });
   }); });
@@ -642,7 +648,7 @@ function wireSocial(d) {
     const msg = f.querySelector('.msg'); msg.textContent = 'Saving…';
     const v = (n) => f[n].value;
     const body = { kind: 'social', type: v('type'), site: v('site'), network: v('network'), minutes: v('minutes'), comments: v('comments'), leads: v('leads'), blog: v('blog'), link: v('link'), notes: v('notes'), key: cleanKey(v('key')) };
-    fetch(d.meta.trackerApi, { method: 'POST', body: JSON.stringify(body) }).then((r) => r.json()).then((j) => {
+    postTracker(d.meta.trackerApi, body).then((j) => {
       if (!j.ok) { if (j.error === 'wrong passcode') { setKey(''); const hk = f.querySelector('input[type=hidden][name=key]'); if (hk) hk.outerHTML = '<label><span class="note">Your passcode</span><input name="key" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="off"></label>'; } msg.textContent = j.error === 'wrong passcode' ? 'Wrong passcode. Type it again (small letters, no spaces).' : 'Not saved: ' + j.error; return; }
       setKey(body.key); msg.textContent = 'Saved to the log.';
       fetch('data.json', { cache: 'no-store' }).then((r) => r.json()).then(loadLive).then((dd) => { render(dd); location.hash = '#social'; });
